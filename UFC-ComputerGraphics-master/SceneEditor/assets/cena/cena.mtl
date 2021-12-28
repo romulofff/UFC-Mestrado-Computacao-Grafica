@@ -1,0 +1,140 @@
+# Blender MTL File: 'cena.blend'
+# Material Count: 14
+
+newmtl ceiling
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.500000 0.500000 0.500000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd ceiling_metal.jpg
+
+newmtl corridor_mtl1
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.598722 0.531619 0.484423
+Ks 0.500000 0.500000 0.500000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd Dirty-Wall-Texture-Set-banner_thumb[2].jpg
+
+newmtl corridor_mtl1_NONE
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.598722 0.531619 0.484423
+Ks 0.500000 0.500000 0.500000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd metal_wall_texture-200038-SM.jpg
+
+newmtl corridor_mtl1_metal_wall_texture-200038-SM.jpg
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.598722 0.531619 0.484423
+Ks 0.500000 0.500000 0.500000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd metal_wall_texture-200038-SM.jpg
+
+newmtl dirty_wall
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.500000 0.500000 0.500000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd Dirty-Wall-Texture-Set-banner_thumb[2].jpg
+
+newmtl ferro_preto
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.326375 0.306054 0.221573
+Ks 0.500000 0.500000 0.500000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd Rusty_cast_iron_texture_by_BlokkSto_menor.jpg
+
+newmtl ferro_preto_NONE
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.326375 0.306054 0.221573
+Ks 0.500000 0.500000 0.500000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd Rusty_cast_iron_texture_by_BlokkSto_menor.jpg
+
+newmtl floor
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.400914 0.631850 0.640000
+Ks 0.500000 0.500000 0.500000
+Ni 1.000000
+d 1.000000
+illum 2
+
+newmtl lamp_texture
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 1.000000 1.000000 1.000000
+Ks 1.000000 1.000000 1.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd lamp_texture.jpg
+
+newmtl metal_door
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.541960 0.551208 0.558555
+Ks 0.500000 0.500000 0.500000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd metal_door.jpg
+
+newmtl metal_door_Rusty_cast_iron_texture_by_BlokkSto_menor.jpg
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.541960 0.551208 0.558555
+Ks 0.500000 0.500000 0.500000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd Rusty_cast_iron_texture_by_BlokkSto_menor.jpg
+
+newmtl metal_floor
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.500000 0.500000 0.500000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd metal_floor.jpg
+
+newmtl metal_orange
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.500000 0.500000 0.500000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd dead_finks_don__t_talk_by_darkwood67.jpg
+
+newmtl yellow
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.691613 0.553438 0.000000
+Ks 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 1
