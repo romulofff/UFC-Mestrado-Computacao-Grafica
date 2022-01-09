@@ -2,8 +2,20 @@ import OpenGL
 from OpenGL.GL import *
 from OpenGL.GLUT import *
 from OpenGL.GLU import *
+from random import randrange, uniform
 
-w,h= 500,500
+w,h= 800,600
+matrix = [ [ [uniform(0,1),uniform(0,1),uniform(0,1)] for a in range(0,600)] for b in range(0,800)]
+
+def initMatrix():
+    for a in range(0,800):
+        for b in range(0,600):
+            glColor3f(matrix[a][b][0],matrix[a][b][1],matrix[a][b][2])
+            glBegin(GL_POINTS)
+            glVertex3f(float(a), float(b), 0.0)
+            glEnd()
+    
+
 def square():
     glBegin(GL_QUADS)
     glVertex2f(100, 100)
@@ -13,10 +25,10 @@ def square():
     glEnd()
 
 def iterate():
-    glViewport(0, 0, 500, 500)
+    glViewport(0, 0, w, h)
     glMatrixMode(GL_PROJECTION)
     glLoadIdentity()
-    glOrtho(0.0, 500, 0.0, 500, 0.0, 1.0)
+    glOrtho(0.0, w, 0.0, h, 0.0, 1.0)
     glMatrixMode (GL_MODELVIEW)
     glLoadIdentity()
 
@@ -25,9 +37,10 @@ def showScreen():
     glLoadIdentity()
     iterate()
     glColor3f(1.0, 0.0, 3.0)
-    square()
+    #square()
+    initMatrix()
     glutSwapBuffers()
-    
+
 # Initialize a glut instance which will allow us to customize our window
 glutInit()
 glutInitDisplayMode(GLUT_RGBA)  # Set the display mode to be colored
