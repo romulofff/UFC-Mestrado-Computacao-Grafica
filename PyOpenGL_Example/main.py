@@ -8,8 +8,8 @@ w,h= 800,600
 matrix = [ [ [uniform(0,1),uniform(0,1),uniform(0,1)] for a in range(0,600)] for b in range(0,800)]
 
 def init_matrix():
-    for a in range(0,800):
-        for b in range(0,600):
+    for a in range(w):
+        for b in range(h):
             glColor3f(matrix[a][b][0],matrix[a][b][1],matrix[a][b][2])
             glBegin(GL_POINTS)
             glVertex3f(float(a), float(b), 0.0)
@@ -38,7 +38,7 @@ def showScreen():
     iterate()
     glColor3f(1.0, 0.0, 3.0)
     #square()
-    initMatrix()
+    init_matrix()
     glutSwapBuffers()
 
 # Initialize a glut instance which will allow us to customize our window
