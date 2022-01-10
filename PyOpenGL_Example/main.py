@@ -5,7 +5,7 @@ from OpenGL.GLU import *
 from random import randrange, uniform
 
 w,h= 800,600
-matrix = [ [ [uniform(0,1),uniform(0,1),uniform(0,1)] for a in range(0,600)] for b in range(0,800)]
+matrix = [ [ [uniform(0,1),uniform(0,1),uniform(0,1)] for a in range(h)] for b in range(w)]
 
 def init_matrix():
     for a in range(w):
