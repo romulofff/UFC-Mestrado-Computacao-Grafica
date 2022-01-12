@@ -10,13 +10,13 @@ def cross_product(point_a, point_b):
     return Point(x, y, z)
 
 
+def dot(vector1, vector2):
+    return vector1.x * vector2.x + vector1.y * vector2.y + vector1.z * vector2.z
+
+
 def normalize_vector(vector):
     norm = np.sqrt(np.square(vector).sum())
     return vector / norm
-
-
-def dot(vector1, vector2):
-    return vector1.x * vector2.x + vector1.y * vector2.y + vector1.z * vector2.z
 
 
 def point_matrix_mult(point: Point, matriz):
