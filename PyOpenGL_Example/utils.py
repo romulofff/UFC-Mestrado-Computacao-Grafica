@@ -24,7 +24,7 @@ def point_matrix_mult(point: Point, matriz):
 
 
 if __name__ == '__main__':
-    p = Point(1, 0, 0)
-    matriz = np.matrix([[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0]])
+    p = Point(1, 0, 1)
+    matriz = np.matrix([[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0,0,0,0]])
     res = point_matrix_mult(p, matriz)
     print(res)
