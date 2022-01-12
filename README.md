@@ -1,2 +1,2 @@
-# UFC Mestrado --> Computação Gráfica
+# UFC Mestrado - Computação Gráfica
 ## Trabalho Final
