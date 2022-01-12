@@ -7,7 +7,7 @@ def cross_product(point_a, point_b):
     x = point_a.y*point_b.z - point_a.z*point_b.y
     y = point_a.z*point_b.x - point_a.x*point_b.z
     z = point_a.x*point_b.y - point_a.y*point_b.x
-    return Point(x, y, z, 0)
+    return Point(x, y, z, 1)
 
 
 def dot(vector1, vector2):
@@ -32,3 +32,6 @@ if __name__ == '__main__':
                        [0, 0, 1, 0], [0, 0, 0, 0]])
     res = point_matrix_mult(p, matriz)
     print(res)
+    newp = Point(1,0,0)
+    newp1 = Point(0,1,0)
+    print(cross_product(newp,newp1).matrix)
