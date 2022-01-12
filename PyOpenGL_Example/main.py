@@ -68,9 +68,9 @@ if __name__ == '__main__':
     matrix = [[[uniform(0, 1), uniform(0, 1), uniform(0, 1)]
                for a in range(h)] for b in range(w)]
 
-    point_xyz = Point(10, 10, 10)
-    lookat = Point(2, 0, 0)
-    view_up = Point(0, 2, 0)
+    point_xyz = Point(0,0,0)
+    lookat = Point(0, 0, -1)
+    view_up = Point(0, 1, 0)
     sagital_point = Point(2, 2, 2)
 
     view = Camera(point_xyz=point_xyz.matrix,
