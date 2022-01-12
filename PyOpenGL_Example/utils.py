@@ -4,10 +4,10 @@ from point import Point
 
 
 def cross_product(point_a, point_b):
-    x = point_a[0, 1]*point_b[0, 2] - point_a[0, 2] * point_b[0, 1]
-    y = point_a[0, 2]*point_b[0, 0] - point_a[0, 0] * point_b[0, 2]
-    z = point_a[0, 0]*point_b[0, 1] - point_a[0, 1] * point_b[0, 0]
-    return np.matrix([x, y, z])
+    x = point_a.y*point_b.z - point_a.z*point_b.y
+    y = point_a.z*point_b.x - point_a.x*point_b.z
+    z = point_a.x*point_b.y - point_a.y*point_b.x
+    return Point(x, y, z)
 
 
 def normalize_vector(vector):
@@ -16,7 +16,7 @@ def normalize_vector(vector):
 
 
 def dot(vector1, vector2):
-    return vector1[0, 0] * vector2[0, 0] + vector1[0, 1] * vector2[0, 1] + vector1[0, 2] * vector2[0, 2]
+    return vector1.x * vector2.x + vector1.y * vector2.y + vector1.z * vector2.z
 
 
 def point_matrix_mult(point: Point, matriz):
@@ -25,6 +25,7 @@ def point_matrix_mult(point: Point, matriz):
 
 if __name__ == '__main__':
     p = Point(1, 0, 1)
-    matriz = np.matrix([[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0,0,0,0]])
+    matriz = np.matrix([[1, 0, 0, 0], [0, 1, 0, 0],
+                       [0, 0, 1, 0], [0, 0, 0, 0]])
     res = point_matrix_mult(p, matriz)
     print(res)
