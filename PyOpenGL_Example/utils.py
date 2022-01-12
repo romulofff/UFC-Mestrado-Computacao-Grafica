@@ -16,8 +16,8 @@ def dot(vector1, vector2):
 
 def normalize_vector(vector):
     if isinstance(vector, Point):
-        norm = np.sqrt(np.square(vector.matrix).sum())
-        return Point.from_matrix(vector.matrix / norm)
+        norm = np.sqrt(np.square(vector.matrix[:,0:3]).sum())
+        return Point.from_matrix(vector.matrix[:, 0:3] / norm)
     else:
         norm = np.sqrt(np.square(vector).sum())
     return vector / norm
@@ -32,6 +32,6 @@ if __name__ == '__main__':
                        [0, 0, 1, 0], [0, 0, 0, 0]])
     res = point_matrix_mult(p, matriz)
     print(res)
-    newp = Point(1,0,0)
+    newp = Point(3,3,3)
     newp1 = Point(0,1,0)
-    print(cross_product(newp,newp1).matrix)
+    print(normalize_vector(newp).matrix)

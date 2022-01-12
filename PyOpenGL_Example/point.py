@@ -13,5 +13,6 @@ class Point:
         x = matrix[0]
         y = matrix[1]
         z = matrix[2]
-        k = matrix[3]
+        #k = matrix[3]
+        k = 1
         return cls(x,y,z,k)
