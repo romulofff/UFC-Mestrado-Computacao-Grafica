@@ -19,7 +19,7 @@ def rotate_vector(vector, angle, axis):
     sen_positive = math.degrees(math.sen(angle))
     sen_negative = -math.degrees(math.sen(angle))
     if axis == 'z':
-        matrix_z = np.matrix = [[cos_positive, sen_negative, 0],
+        matrix_z = np = [[cos_positive, sen_negative, 0],
                                 [sen_positive, cos_positive, 0],
                                 [0,            0,            1],
                                 ]
@@ -73,8 +73,8 @@ if __name__ == '__main__':
     view_up = Point(0, 1, 0)
     sagital_point = Point(2, 2, 2)
 
-    view = Camera(point_xyz=point_xyz.matrix,
-                  lookat=lookat.matrix, view_up=view_up.matrix)
+    view = Camera(point_xyz=point_xyz,
+                  lookat=lookat, view_up=view_up)
     print(view.world_to_camera)
 
     # Initialize a glut instance which will allow us to customize our window

@@ -9,21 +9,20 @@ class Camera:
         self.vector_i = self.origin_cordinates_i(point_xyz, view_up)
         self.vector_j = normalize_vector(
             cross_product(self.vector_k, self.vector_i))
-        self.world_to_camera = np.matrix([[self.vector_i[0, 0], self.vector_i[0, 1], self.vector_i[0, 2], -(dot(self.vector_i, self.point_xyz))],
-                                         [self.vector_j[0, 0], self.vector_j[0, 1],
-                                             self.vector_j[0, 2], -(dot(self.vector_j, self.point_xyz))],
-                                         [self.vector_k[0, 0], self.vector_k[0, 1],
-                                             self.vector_k[0, 2], -(dot(self.vector_k, self.point_xyz))],
-                                         [0, 0, 0, 1]]
-                                         )
+
+        self.world_to_camera = np.matrix([[self.vector_i.x, self.vector_i.y, self.vector_i.z, -(dot(self.vector_i, self.point_xyz))],
+                                          [self.vector_j.x, self.vector_j.y, self.vector_j.z, -(dot(self.vector_j, self.point_xyz))],
+                                          [self.vector_k.x, self.vector_k.y, self.vector_k.z, -(dot(self.vector_k, self.point_xyz))],
+                                          [0, 0, 0, 1],
+        ])
 
     def origin_cordinates_k(self, point_xyz, lookat):
-        vector_k = point_xyz - lookat
+        vector_k = Point.from_matrix(point_xyz.matrix - lookat.matrix)
         vector_k = normalize_vector(vector_k)
         return vector_k
 
     def origin_cordinates_i(self, point_xyz, view_up):
-        v_up = view_up - point_xyz
+        v_up = Point.from_matrix(view_up.matrix - point_xyz.matrix)
         vector_i = cross_product(v_up, self.vector_k)
         vector_i = normalize_vector(vector_i)
         return vector_i
