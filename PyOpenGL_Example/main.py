@@ -9,6 +9,7 @@ from OpenGL.GLUT import *
 
 from camera import Camera
 from point import Point
+from raycasting import Raycasting
 
 
 def rotate_vector(vector, angle, axis):
@@ -24,16 +25,6 @@ def rotate_vector(vector, angle, axis):
                                 [0,            0,            1],
                                 ]
 
-
-def init_matrix():
-    for a in range(w):
-        for b in range(h):
-            glColor3f(matrix[a][b][0], matrix[a][b][1], matrix[a][b][2])
-            glBegin(GL_POINTS)
-            glVertex3f(float(a), float(b), 0.0)
-            glEnd()
-
-
 def square():
     glBegin(GL_QUADS)
     glVertex2f(100, 100)
@@ -42,12 +33,31 @@ def square():
     glVertex2f(100, 200)
     glEnd()
 
+def draw_scene(width, height, nlines, ncols,matrix):
+    width_frame = width/ncols
+    height_frame = height/nlines
+    init_width = -width * 0.5
+    init_height = height * 0.5
+    for line in range(0,nlines):
+        y1 = init_height - height_frame*line
+        y2 = init_height - height_frame*(line+1)
+        for col in range(0,ncols):
+            glColor3f(matrix[line][col][0],matrix[line][col][1],matrix[line][col][2])
+            x1 = init_width + width_frame*col
+            x2 = init_width + width_frame*(col+1)
+            glBegin(GL_QUADS)
+            glVertex2f(x1, y1)
+            glVertex2f(x1, y2)
+            glVertex2f(x2, y2)
+            glVertex2f(x2, y1)
+            glEnd()
+    
 
 def iterate():
     glViewport(0, 0, w, h)
     glMatrixMode(GL_PROJECTION)
     glLoadIdentity()
-    glOrtho(0.0, w, 0.0, h, 0.0, 1.0)
+    glOrtho(-w * 0.5, w*0.5, -h*0.5, h*0.5, 0.0, 1.0)
     glMatrixMode(GL_MODELVIEW)
     glLoadIdentity()
 
@@ -58,23 +68,20 @@ def showScreen():
     iterate()
     glColor3f(1.0, 0.0, 3.0)
     # square()
-    init_matrix()
+    draw_scene(w,h,lines,cols,teste_ray.create_matrix())
     glutSwapBuffers()
 
 
 if __name__ == '__main__':
 
-    w, h = 800, 600
-    matrix = [[[uniform(0, 1), uniform(0, 1), uniform(0, 1)]
-               for a in range(h)] for b in range(w)]
-
+    w, h, lines, cols = 500, 500, 150, 150
     point_xyz = Point(0,0,0)
     lookat = Point(0, 0, -1)
     view_up = Point(0, 1, 0)
     sagital_point = Point(2, 2, 2)
-
     view = Camera(point_xyz=point_xyz,
                   lookat=lookat, view_up=view_up)
+    teste_ray = Raycasting(-1,view, sagital_point, w,h,lines,cols)
     print(view.world_to_camera)
 
     # Initialize a glut instance which will allow us to customize our window
@@ -82,11 +89,11 @@ if __name__ == '__main__':
     glutInitDisplayMode(GLUT_RGBA)  # Set the display mode to be colored
     glutInitWindowSize(w, h)   # Set the width and height of your window
     # Set the position at which this windows should appear
-    glutInitWindowPosition(0, 0)
+    glutInitWindowPosition(2000, 100)
     # Give your window a title
     wind = glutCreateWindow("OpenGL Coding Practice")
     # Tell OpenGL to call the showScreen method continuously
     glutDisplayFunc(showScreen)
     # Draw any graphics or shapes in the showScreen function at all times
-    glutIdleFunc(showScreen)
+    #glutIdleFunc(showScreen)
     glutMainLoop()  # Keeps the window created above displaying/running in a loop
