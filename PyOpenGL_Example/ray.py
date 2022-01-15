@@ -6,6 +6,7 @@ class Ray:
         self.frist_point = frist_point
         self.last_point = last_point
         self.direction = normalize_vector(Point.from_matrix(last_point.matrix - frist_point.matrix))
-        self.direction_measure = Point.from_matrix(self.direction.matrix * measure)
+        #self.direction_measure = Point.from_matrix(self.direction.matrix * measure)
+        self.measure = measure
 
 
