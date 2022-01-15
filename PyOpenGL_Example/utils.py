@@ -1,6 +1,8 @@
 import numpy as np
 
 from point import Point
+#from ray import Ray
+#from sphere import Sphere
 
 
 def cross_product(point_a, point_b):
@@ -24,6 +26,17 @@ def normalize_vector(vector):
 
 def point_matrix_mult(point: Point, matriz):
     return np.matmul(matriz, point.matrix.transpose()).transpose()
+
+def collision_ray_sphere(ray, sphere):
+    v = Point.from_matrix(-1 * sphere.center_camera.matrix)
+    a = dot(ray.direction_measure,ray.direction_measure)
+    b = dot(ray.direction_measure, v)
+    c = dot(v,v) - sphere.radius
+    delta = b**2 - 4*a*c
+    if delta >= 0:
+        return True
+    if delta < 0:
+        return False
 
 
 if __name__ == '__main__':

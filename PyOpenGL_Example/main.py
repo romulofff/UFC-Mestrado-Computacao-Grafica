@@ -10,6 +10,7 @@ from OpenGL.GLUT import *
 from camera import Camera
 from point import Point
 from raycasting import Raycasting
+from sphere import Sphere
 
 
 def rotate_vector(vector, angle, axis):
@@ -80,7 +81,9 @@ if __name__ == '__main__':
     view_up = Point(0, 1, 0)
     view = Camera(point_xyz=point_xyz,
                   lookat=lookat, view_up=view_up)
-    teste_ray = Raycasting(-1,view, 0, w,h,lines,cols)
+    sphere = Sphere(Point(30,30,10), 30)
+    sphere.get_center_camera(view)
+    teste_ray = Raycasting(sphere,view, 0, w,h,lines,cols)
     print(view.world_to_camera)
 
     # Initialize a glut instance which will allow us to customize our window

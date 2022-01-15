@@ -8,6 +8,7 @@ from utils import *
 class Raycasting:
     def __init__(self, scene, camera, dist_plane, height, width, nlines, ncols) -> None:
         self.camera = camera
+        self.scene = scene
         self.dist_plane = dist_plane
         self.width_frame = width/ncols
         self.height_frame = height/nlines
@@ -24,12 +25,15 @@ class Raycasting:
         for line in range(0, self.nlines):
             y = self.point_init.y - line * self.height_frame
             for col in range(0, self.ncols):
-                x = self.point_init.x - line * self.width_frame
+                x = self.point_init.x + col * self.width_frame
                 # Create ray to Perspective
-                ray = Ray(Point(0,0,0), Point(x,y,-self.dist_plane))
-                print(ray.direction.matrix)
+                ray = Ray(Point(0,0,0), Point(x,y,-self.dist_plane), 20)
                 # Calculate intersection with scene list
+                if(collision_ray_sphere(ray, self.scene)):
+                    self.matrix[line][col] = [1.0,1.0,1.0]
+                else:
+                    self.matrix[line][col] = [0.0,0.0,0.0]
                 # If intersection att matrix
-                self.matrix[line][col] = [
-                    uniform(0, 1), uniform(0, 1), uniform(0, 1)]
+                # self.matrix[line][col] = [
+                #     uniform(0, 1), uniform(0, 1), uniform(0, 1)]
         return self.matrix
