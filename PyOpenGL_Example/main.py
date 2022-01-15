@@ -78,10 +78,9 @@ if __name__ == '__main__':
     point_xyz = Point(0,0,0)
     lookat = Point(0, 0, -1)
     view_up = Point(0, 1, 0)
-    sagital_point = Point(2, 2, 2)
     view = Camera(point_xyz=point_xyz,
                   lookat=lookat, view_up=view_up)
-    teste_ray = Raycasting(-1,view, sagital_point, w,h,lines,cols)
+    teste_ray = Raycasting(-1,view, 0, w,h,lines,cols)
     print(view.world_to_camera)
 
     # Initialize a glut instance which will allow us to customize our window

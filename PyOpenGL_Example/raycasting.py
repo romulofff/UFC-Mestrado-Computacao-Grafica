@@ -5,13 +5,13 @@ from utils import *
 
 
 class Raycasting:
-    def __init__(self, scene, camera, direction, height, width, nlines, ncols) -> None:
+    def __init__(self, scene, camera, dist_plane, height, width, nlines, ncols) -> None:
         self.camera = camera
+        self.dist_plane = dist_plane
         self.width_frame = width/ncols
         self.height_frame = height/nlines
         self.point_init = Point(-width*0.5 + self.width_frame*0.5,
-                                height*0.5 - 0.5*self.height_frame, -direction.matrix)
-        self.direction = normalize_vector(direction)
+                                height*0.5 - 0.5*self.height_frame, -self.dist_plane)
         self.height = height
         self.width = width
         self.nlines = nlines
