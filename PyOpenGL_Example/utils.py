@@ -23,7 +23,7 @@ def normalize_vector(vector):
     return vector / norm
 
 def point_matrix_mult(point: Point, matriz):
-    return np.matmul(matriz, point.matrix.transpose())
+    return np.matmul(matriz, point.matrix.transpose()).transpose()
 
 
 if __name__ == '__main__':
