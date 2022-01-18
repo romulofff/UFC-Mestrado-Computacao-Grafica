@@ -23,7 +23,7 @@ class Collider:
                 return self._collision_ray_object(ray, object)
 
     def _collision_ray_sphere(self, ray, sphere):
-        v = Point.from_matrix(ray.frist_point.matrix -
+        v = Point.from_matrix(ray.first_point.matrix -
                               sphere.center_camera.matrix)
         a = ray.measure**2 * dot(ray.direction, ray.direction)
         b = ray.measure * dot(ray.direction, v)
