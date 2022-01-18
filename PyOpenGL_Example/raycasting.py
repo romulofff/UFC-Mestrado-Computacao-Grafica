@@ -27,12 +27,12 @@ class Raycasting:
             for col in range(0, self.ncols):
                 x = self.point_init.x + col * self.width_frame
                 # Create ray to Perspective
-                ray = Ray(Point(0,0,0), Point(x,y,-self.dist_plane), 6)
+                ray = Ray(Point(0, 0, 0), Point(x, y, -self.dist_plane), 6)
                 # Calculate intersection with scene list
                 if(collision_ray_sphere(ray, self.scene)):
-                    self.matrix[line][col] = [1.0,1.0,1.0]
+                    self.matrix[line][col] = [1.0, 1.0, 1.0]
                 else:
-                    self.matrix[line][col] = [0.0,0.0,0.0]
+                    self.matrix[line][col] = [0.0, 0.0, 0.0]
                 # If intersection att matrix
                 # self.matrix[line][col] = [
                 #     uniform(0, 1), uniform(0, 1), uniform(0, 1)]

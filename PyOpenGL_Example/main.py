@@ -22,9 +22,10 @@ def rotate_vector(vector, angle, axis):
     sen_negative = -math.degrees(math.sen(angle))
     if axis == 'z':
         matrix_z = np = [[cos_positive, sen_negative, 0],
-                                [sen_positive, cos_positive, 0],
-                                [0,            0,            1],
-                                ]
+                         [sen_positive, cos_positive, 0],
+                         [0,            0,            1],
+                         ]
+
 
 def square():
     glBegin(GL_QUADS)
@@ -34,16 +35,18 @@ def square():
     glVertex2f(100, 200)
     glEnd()
 
-def draw_scene(width, height, nlines, ncols,matrix):
+
+def draw_scene(width, height, nlines, ncols, matrix):
     width_frame = width/ncols
     height_frame = height/nlines
     init_width = -width * 0.5
     init_height = height * 0.5
-    for line in range(0,nlines):
+    for line in range(0, nlines):
         y1 = init_height - height_frame*line
         y2 = init_height - height_frame*(line+1)
-        for col in range(0,ncols):
-            glColor3f(matrix[line][col][0],matrix[line][col][1],matrix[line][col][2])
+        for col in range(0, ncols):
+            glColor3f(matrix[line][col][0], matrix[line]
+                      [col][1], matrix[line][col][2])
             x1 = init_width + width_frame*col
             x2 = init_width + width_frame*(col+1)
             glBegin(GL_QUADS)
@@ -52,7 +55,7 @@ def draw_scene(width, height, nlines, ncols,matrix):
             glVertex2f(x2, y2)
             glVertex2f(x2, y1)
             glEnd()
-    
+
 
 def iterate():
     glViewport(0, 0, w, h)
@@ -69,21 +72,21 @@ def showScreen():
     iterate()
     glColor3f(1.0, 0.0, 3.0)
     # square()
-    draw_scene(w,h,lines,cols,teste_ray.create_matrix())
+    draw_scene(w, h, lines, cols, teste_ray.create_matrix())
     glutSwapBuffers()
 
 
 if __name__ == '__main__':
 
     w, h, lines, cols = 500, 500, 250, 250
-    point_xyz = Point(0,0,0)
+    point_xyz = Point(0, 0, 0)
     lookat = Point(0, 0, -1)
     view_up = Point(0, 1, 0)
     view = Camera(point_xyz=point_xyz,
                   lookat=lookat, view_up=view_up)
-    sphere = Sphere(Point(0,0,-5),4 )
+    sphere = Sphere(Point(0, 0, -5), 4)
     sphere.get_center_camera(view)
-    teste_ray = Raycasting(sphere,view, 20, w,h,lines,cols)
+    teste_ray = Raycasting(sphere, view, 20, w, h, lines, cols)
     print(view.world_to_camera)
 
     # Initialize a glut instance which will allow us to customize our window
@@ -97,5 +100,5 @@ if __name__ == '__main__':
     # Tell OpenGL to call the showScreen method continuously
     glutDisplayFunc(showScreen)
     # Draw any graphics or shapes in the showScreen function at all times
-    #glutIdleFunc(showScreen)
+    # glutIdleFunc(showScreen)
     glutMainLoop()  # Keeps the window created above displaying/running in a loop
