@@ -1,4 +1,5 @@
 from cilinder import Cilinder
+from cone import Cone
 from cube import Cube
 from sphere import Sphere
 from utils import *
@@ -16,6 +17,10 @@ class Collider:
                 return self._collision_ray_cilinder(ray, object)
             elif isinstance(object, Cube):
                 return self._collision_ray_cube(ray, object)
+            elif isinstance(object, Cone):
+                return self._collision_ray_cone(ray, object)
+            else:
+                return self._collision_ray_object(ray, object)
 
     def _collision_ray_sphere(self, ray, sphere):
         v = Point.from_matrix(ray.frist_point.matrix -
@@ -33,4 +38,11 @@ class Collider:
         pass
 
     def _collision_ray_cube(self, ray, object):
+        pass
+
+    def _collision_ray_cone(self, ray, object):
+        pass
+
+    def _collision_ray_object(self, ray, object):
+        # Collide Ray with generic object.
         pass
