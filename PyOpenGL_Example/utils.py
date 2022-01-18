@@ -29,18 +29,6 @@ def point_matrix_mult(point: Point, matriz):
     return np.matmul(matriz, point.matrix.transpose()).transpose()
 
 
-def collision_ray_sphere(ray, sphere):
-    v = Point.from_matrix(ray.frist_point.matrix - sphere.center_camera.matrix)
-    a = ray.measure**2 * dot(ray.direction, ray.direction)
-    b = ray.measure * dot(ray.direction, v)
-    c = dot(v, v) - sphere.radius**2
-    delta = 4*b**2 - 4*a*c
-    if delta >= 0:
-        return True
-    if delta < 0:
-        return False
-
-
 if __name__ == '__main__':
     p = Point(1, 0, 1)
     matriz = np.matrix([[1, 0, 0, 0], [0, 1, 0, 0],

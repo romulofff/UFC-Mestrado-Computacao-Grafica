@@ -2,6 +2,7 @@ from random import randrange, uniform
 
 from point import Point
 from ray import Ray
+from collider import Collider
 from utils import *
 
 
@@ -20,6 +21,7 @@ class Raycasting:
         self.ncols = ncols
         self.matrix = [[[0.5, 0.5, 0.5]
                         for a in range(nlines)] for b in range(ncols)]
+        self.collider = Collider()
 
     def create_matrix(self):
         for line in range(0, self.nlines):
@@ -29,7 +31,7 @@ class Raycasting:
                 # Create ray to Perspective
                 ray = Ray(Point(0, 0, 0), Point(x, y, -self.dist_plane), 6)
                 # Calculate intersection with scene list
-                if(collision_ray_sphere(ray, self.scene)):
+                if(self.collider.collide(ray, [self.scene])):
                     self.matrix[line][col] = [1.0, 1.0, 1.0]
                 else:
                     self.matrix[line][col] = [0.0, 0.0, 0.0]

@@ -94,7 +94,7 @@ if __name__ == '__main__':
     glutInitDisplayMode(GLUT_RGBA)  # Set the display mode to be colored
     glutInitWindowSize(w, h)   # Set the width and height of your window
     # Set the position at which this windows should appear
-    glutInitWindowPosition(2000, 100)
+    glutInitWindowPosition(1000, 100)
     # Give your window a title
     wind = glutCreateWindow("OpenGL Coding Practice")
     # Tell OpenGL to call the showScreen method continuously
