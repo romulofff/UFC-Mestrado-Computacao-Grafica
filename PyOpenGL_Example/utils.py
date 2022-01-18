@@ -18,20 +18,22 @@ def dot(vector1, vector2):
 
 def normalize_vector(vector):
     if isinstance(vector, Point):
-        norm = np.sqrt(np.square(vector.matrix[:,0:3]).sum())
+        norm = np.sqrt(np.square(vector.matrix[:, 0:3]).sum())
         return Point.from_matrix(vector.matrix[:, 0:3] / norm)
     else:
         norm = np.sqrt(np.square(vector).sum())
     return vector / norm
 
+
 def point_matrix_mult(point: Point, matriz):
     return np.matmul(matriz, point.matrix.transpose()).transpose()
+
 
 def collision_ray_sphere(ray, sphere):
     v = Point.from_matrix(ray.frist_point.matrix - sphere.center_camera.matrix)
     a = ray.measure**2 * dot(ray.direction, ray.direction)
     b = ray.measure * dot(ray.direction, v)
-    c = dot(v,v) - sphere.radius**2
+    c = dot(v, v) - sphere.radius**2
     delta = 4*b**2 - 4*a*c
     if delta >= 0:
         return True
@@ -45,6 +47,6 @@ if __name__ == '__main__':
                        [0, 0, 1, 0], [0, 0, 0, 0]])
     res = point_matrix_mult(p, matriz)
     print(res)
-    newp = Point(3,3,3)
-    newp1 = Point(0,1,0)
+    newp = Point(3, 3, 3)
+    newp1 = Point(0, 1, 0)
     print(normalize_vector(newp).matrix)
