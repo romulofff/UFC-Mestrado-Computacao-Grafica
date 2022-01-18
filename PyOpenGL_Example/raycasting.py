@@ -1,8 +1,6 @@
-from random import randrange, uniform
-
+from collider import Collider
 from point import Point
 from ray import Ray
-from collider import Collider
 from utils import *
 
 
