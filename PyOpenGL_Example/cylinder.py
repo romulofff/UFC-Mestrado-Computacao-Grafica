@@ -1,12 +1,14 @@
 from camera import Camera
 from point import Point
-from utils import *
+from utils import point_matrix_mult
 
 
-class Sphere:
-    def __init__(self, center, radius) -> None:
+class Cylinder:
+    def __init__(self, center, radius, height, u) -> None:
         self.center = center
         self.radius = radius
+        self.height = height
+        self.u = u
         self.center_camera = None
 
     def get_center_camera(self, camera):
@@ -22,6 +24,6 @@ if __name__ == '__main__':
     view = Camera(point_xyz=point_xyz,
                   lookat=lookat, view_up=view_up)
 
-    sphere = Sphere(Point(30, 30, 10), 30)
-    sphere.get_center_camera(view)
-    print(sphere.center_camera.matrix)
+    cylinder = Cylinder(Point(30, 30, 10), 30, 5, None)
+    cylinder.get_center_camera(view)
+    print(cylinder.center_camera.matrix)
