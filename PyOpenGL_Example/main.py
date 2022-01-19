@@ -85,10 +85,10 @@ if __name__ == '__main__':
     view_up = Point(0, 1, 0)
     view = Camera(point_xyz=point_xyz,
                   lookat=lookat, view_up=view_up)
-    cylinder = Cylinder(Point(0, 0, -5), 4, 5, Point(0, 0, 1))
+    cylinder = Cylinder(Point(0, 0, -1), 1, 1, Point(0, 0, 1))
     cylinder.get_center_camera(view)
-    sphere = Sphere(Point(0, 0, -5), 4)
-    sphere.get_center_camera(view)
+    # sphere = Sphere(Point(0, 0, -5), 4)
+    # sphere.get_center_camera(view)
     teste_ray = Raycasting(cylinder, view, 20, w, h, lines, cols)
     print(view.world_to_camera)
 

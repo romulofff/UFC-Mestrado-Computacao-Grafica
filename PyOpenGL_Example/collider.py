@@ -35,11 +35,15 @@ class Collider:
             return False
 
     def _collision_ray_cylinder(self, ray, cylinder):
+        # P0 - B
+        c0p0 = Point.from_matrix(
+            ray.first_point.matrix - cylinder.center_camera.matrix)
         # v = (P0 - B) - ((P0 - B) . u)*u
-        v = Point.from_matrix((ray.first_point.matrix - cylinder.center_camera.matrix) - \
-            dot(Point.from_matrix(ray.first_point.matrix - cylinder.center_camera.matrix),
-                cylinder.u)*cylinder.u)
-        w = Point.from_matrix(ray.direction - dot(ray.direction, cylinder.u)*cylinder.u)
+        v = Point.from_matrix(
+            c0p0.matrix - dot(c0p0,  cylinder.u)*cylinder.u.matrix)
+
+        w = Point.from_matrix(
+            ray.direction.matrix - dot(ray.direction, cylinder.u)*cylinder.u.matrix)
         a = dot(w, w)
         b = dot(v, w)
         c = dot(v, v) - cylinder.radius**2
@@ -48,7 +52,7 @@ class Collider:
             return True
         if delta < 0:
             return False
-            
+
     def _collision_ray_cube(self, ray, object):
         pass
 

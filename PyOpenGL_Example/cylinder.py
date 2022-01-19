@@ -24,6 +24,6 @@ if __name__ == '__main__':
     view = Camera(point_xyz=point_xyz,
                   lookat=lookat, view_up=view_up)
 
-    cylinder = Cylinder(Point(30, 30, 10), 30, 5, None)
+    cylinder = Cylinder(Point(5, 5, 1), 30, 5, None)
     cylinder.get_center_camera(view)
     print(cylinder.center_camera.matrix)
