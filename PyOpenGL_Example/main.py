@@ -96,7 +96,9 @@ if __name__ == '__main__':
     sphere.get_center_camera(view)
     sphere1 = Sphere(Point(-3, 0, -5), 4, gold)
     sphere1.get_center_camera(view)
-    scene = [sphere,sphere1]
+    sphere2 = Sphere(Point(3, -8, -5), 4, gold)
+    sphere2.get_center_camera(view)
+    scene = [sphere,sphere1,sphere2]
     teste_ray = Raycasting(scene, view, 20, w, h, lines, cols)
     print(view.world_to_camera)
 
