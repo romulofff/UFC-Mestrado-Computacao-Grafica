@@ -10,17 +10,16 @@ class Collider:
         pass
 
     def collide(self, ray, objects):
-        for object in objects:
-            if isinstance(object, Sphere):
-                return self._collision_ray_sphere(ray, object)
-            elif isinstance(object, Cylinder):
-                return self._collision_ray_cylinder(ray, object)
-            elif isinstance(object, Cube):
-                return self._collision_ray_cube(ray, object)
-            elif isinstance(object, Cone):
-                return self._collision_ray_cone(ray, object)
-            else:
-                return self._collision_ray_object(ray, object)
+        if isinstance(objects, Sphere):
+            return self._collision_ray_sphere(ray, objects)
+        elif isinstance(objects, Cylinder):
+            return self._collision_ray_cylinder(ray, objects)
+        elif isinstance(objects, Cube):
+            return self._collision_ray_cube(ray, objects)
+        elif isinstance(objects, Cone):
+            return self._collision_ray_cone(ray, objects)
+        else:
+            return self._collision_ray_object(ray, objects)
 
     def _collision_ray_sphere(self, ray, sphere):
         v = Point.from_matrix(ray.first_point.matrix -

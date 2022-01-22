@@ -29,10 +29,10 @@ class Raycasting:
                 # Create ray to Perspective
                 ray = Ray(Point(0, 0, 0), Point(x, y, -self.dist_plane), 6)
                 # Calculate intersection with scene list
-                if(self.collider.collide(ray, [self.scene])):
-                    self.matrix[line][col] = [1.0, 1.0, 1.0]
-                else:
-                    self.matrix[line][col] = [0.0, 0.0, 0.0]
+                for objects in self.scene:
+                    if(self.collider.collide(ray, objects)):
+                        self.matrix[line][col] = [1.0, 1.0, 1.0]
+                        break
                 # If intersection att matrix
                 # self.matrix[line][col] = [
                 #     uniform(0, 1), uniform(0, 1), uniform(0, 1)]

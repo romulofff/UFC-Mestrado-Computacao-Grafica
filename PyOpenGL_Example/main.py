@@ -12,6 +12,7 @@ from cylinder import Cylinder
 from point import Point
 from raycasting import Raycasting
 from sphere import Sphere
+from material import Material
 
 
 def rotate_vector(vector, angle, axis):
@@ -79,17 +80,24 @@ def showScreen():
 
 if __name__ == '__main__':
 
-    w, h, lines, cols = 500, 500, 250, 250
+    w, h, lines, cols = 500, 500, 100, 100
     point_xyz = Point(0, 0, 0)
     lookat = Point(0, 0, -1)
     view_up = Point(0, 1, 0)
     view = Camera(point_xyz=point_xyz,
                   lookat=lookat, view_up=view_up)
-    cylinder = Cylinder(Point(0, 0, -1), 1, 1, Point(0, 0, 1))
-    cylinder.get_center_camera(view)
-    # sphere = Sphere(Point(0, 0, -5), 4)
-    # sphere.get_center_camera(view)
-    teste_ray = Raycasting(cylinder, view, 20, w, h, lines, cols)
+    # cylinder = Cylinder(Point(0, 0, -1), 1, 1, Point(0, 0, 1))
+    # cylinder.get_center_camera(view)
+
+    bronze = Material([0.2125, 0.1275, 0.054],[0.714, 0.4284, 0.18144],[0.393548, 0.271906, 0.166721])
+    gold = Material([0.24725, 0.1995, 0.0745],[0.75164, 0.60648, 0.22648],[0.628281, 0.555802, 0.366065])
+
+    sphere = Sphere(Point(0, 8, -5), 4, bronze)
+    sphere.get_center_camera(view)
+    sphere1 = Sphere(Point(-3, 0, -5), 4, gold)
+    sphere1.get_center_camera(view)
+    scene = [sphere,sphere1]
+    teste_ray = Raycasting(scene, view, 20, w, h, lines, cols)
     print(view.world_to_camera)
 
     # Initialize a glut instance which will allow us to customize our window
