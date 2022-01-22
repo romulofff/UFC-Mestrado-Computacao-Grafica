@@ -47,7 +47,35 @@ class Collider:
 
 
     def _collision_ray_cylinder(self, ray, cylinder):
-        pass
+        w = ray.direction.matrix - dot(ray.direction, cylinder.u)* ray.direction.matrix
+        w = Point.from_matrix(w)
+
+        v_aux = ray.first_point.matrix - cylinder.center.matrix
+        v_aux = Point.from_matrix(v_aux)
+        v =  v_aux.matrix - dot(v_aux, cylinder.u) * cylinder.u.matrix
+        v = Point.from_matrix(v)
+
+        a = dot(w,w)
+        b = dot(v,w)
+        c = dot(v,v) - cylinder.radius**2
+
+        delta = b**2 - a * c
+        if delta>0:
+            t1 = (-b + math.sqrt(delta) ) / a
+            t2 = (-b - math.sqrt(delta) ) / a
+            p1 = Point.from_matrix(ray.first_point.matrix + t1 * ray.direction.matrix)
+            p2 = Point.from_matrix(ray.first_point.matrix + t2 * ray.direction.matrix)
+            if(dist_point(p1, ray.first_point) > dist_point(p2, ray.first_point)):
+                p1 = p2
+            #return True
+            return dist_point(p1, ray.first_point)
+        elif delta ==0:
+            t1 = (-b + math.sqrt(delta) ) / a
+            p1 = Point.from_matrix(ray.first_point.matrix + t1 * ray.direction.matrix)
+            #return True
+            dist_point(p1, ray.first_point)
+        else:
+            return -1
 
     def _collision_ray_cube(self, ray, object):
         pass

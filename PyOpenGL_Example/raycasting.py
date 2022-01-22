@@ -29,18 +29,12 @@ class Raycasting:
                 # Create ray to Perspective
                 ray = Ray(Point(0, 0, 0), Point(x, y, -self.dist_plane), 6)
                 # Calculate intersection with scene list
-                # for objects in self.scene:
-                #     if(self.collider.collide(ray, objects)):
-                #         self.matrix[line][col] = [1.0, 1.0, 1.0]
-                #         break
                 current_dist = 7879878978979
                 for objects in self.scene:
                     dist_object = self.collider.collide(ray, objects)
                     if (dist_object < current_dist and dist_object >= 0):
                         current_dist = dist_object
                         self.matrix[line][col] = objects.material.ambient
-                # If intersection att matrix
-                # self.matrix[line][col] = [
-                #     uniform(0, 1), uniform(0, 1), uniform(0, 1)]
+                ##todo: Pegar ponto de colisão e calcular iluminações
         print("finish")
         return self.matrix
