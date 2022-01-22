@@ -1,4 +1,5 @@
 import numpy as np
+import math
 
 from point import Point
 #from ray import Ray
@@ -27,6 +28,10 @@ def normalize_vector(vector):
 
 def point_matrix_mult(point: Point, matriz):
     return np.matmul(matriz, point.matrix.transpose()).transpose()
+
+def dist_point(pointA, pointB):
+    dist = (pointB.x - pointA.x)**2 + (pointB.y - pointA.y)**2 + (pointB.z - pointA.z)**2
+    return math.sqrt(dist)
 
 
 if __name__ == '__main__':

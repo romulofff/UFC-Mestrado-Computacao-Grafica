@@ -3,6 +3,7 @@ from cone import Cone
 from cube import Cube
 from sphere import Sphere
 from utils import *
+import math
 
 
 class Collider:
@@ -22,25 +23,31 @@ class Collider:
             return self._collision_ray_object(ray, objects)
 
     def _collision_ray_sphere(self, ray, sphere):
-        # v = Point.from_matrix(ray.first_point.matrix -
-        #                       sphere.center_camera.matrix)
-        # a = ray.measure**2 * dot(ray.direction, ray.direction)
-        # b = ray.measure * dot(ray.direction, v)
-        # c = dot(v, v) - sphere.radius**2
-        # delta = 4*b**2 - 4*a*c
         v = Point.from_matrix(ray.first_point.matrix - sphere.center_camera.matrix)
         a = dot(ray.direction, ray.direction)
         b = dot(v, ray.direction)
-        print(b)
         c = dot(v,v) - sphere.radius**2
         delta = b**2 - a * c
-        if delta >= 0:
-            return True
-        if delta < 0:
-            return False
+        if delta>0:
+            t1 = (-b + math.sqrt(delta) ) / a
+            t2 = (-b - math.sqrt(delta) ) / a
+            p1 = Point.from_matrix(ray.first_point.matrix + t1 * ray.direction.matrix)
+            p2 = Point.from_matrix(ray.first_point.matrix + t2 * ray.direction.matrix)
+            if(dist_point(p1, ray.first_point) > dist_point(p2, ray.first_point)):
+                p1 = p2
+            #return True
+            return dist_point(p1, ray.first_point)
+        elif delta ==0:
+            t1 = (-b + math.sqrt(delta) ) / a
+            p1 = Point.from_matrix(ray.first_point.matrix + t1 * ray.direction.matrix)
+            #return True
+            dist_point(p1, ray.first_point)
+        else:
+            return -1
+
 
     def _collision_ray_cylinder(self, ray, cylinder):
-        
+        pass
 
     def _collision_ray_cube(self, ray, object):
         pass

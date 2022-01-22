@@ -92,13 +92,11 @@ if __name__ == '__main__':
     bronze = Material([0.2125, 0.1275, 0.054],[0.714, 0.4284, 0.18144],[0.393548, 0.271906, 0.166721])
     gold = Material([0.24725, 0.1995, 0.0745],[0.75164, 0.60648, 0.22648],[0.628281, 0.555802, 0.366065])
 
-    sphere = Sphere(Point(0, 8, -5), 4, bronze)
+    sphere = Sphere(Point(0, 0, -4.9), 4, bronze)
     sphere.get_center_camera(view)
-    sphere1 = Sphere(Point(-3, 0, -5), 4, gold)
+    sphere1 = Sphere(Point(0, 3, -5), 4, gold)
     sphere1.get_center_camera(view)
-    sphere2 = Sphere(Point(3, -8, -5), 4, gold)
-    sphere2.get_center_camera(view)
-    scene = [sphere,sphere1,sphere2]
+    scene = [sphere,sphere1]
     teste_ray = Raycasting(scene, view, 20, w, h, lines, cols)
     print(view.world_to_camera)
 
