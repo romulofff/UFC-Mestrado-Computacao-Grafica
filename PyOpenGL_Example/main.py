@@ -15,6 +15,9 @@ from sphere import Sphere
 from material import Material
 from ambient_light import AmbientLight
 from point_light import PointLight
+from directionoal_point_light import DirectionalPointLight
+
+from utils import *
 
 
 def rotate_vector(vector, angle, axis):
@@ -82,8 +85,8 @@ def showScreen():
 
 if __name__ == '__main__':
 
-    w, h, lines, cols = 500, 500, 500, 500
-    point_xyz = Point(0, 0, 4.4)
+    w, h, lines, cols = 500, 500, 150, 150
+    point_xyz = Point(0, 0, 5)
     lookat = Point(0, 0, -1)
     view_up = Point(0, 1, 0)
     view = Camera(point_xyz=point_xyz,
@@ -91,20 +94,25 @@ if __name__ == '__main__':
     # cylinder = Cylinder(Point(0, 0, -1), 1, 1, Point(0, 0, 1))
     # cylinder.get_center_camera(view)
 
-    bronze = Material([0.2125, 0.1275, 0.054],[0.714, 0.4284, 0.18144],[0.393548, 0.271906, 0.166721],20)
+    bronze = Material([0.2125, 0.1275, 0.054],[0.714, 0.4284, 0.18144],[0.993548, 0.971906, 0.966721],20)
     gold = Material([0.24725, 0.1995, 0.0745],[0.75164, 0.60648, 0.22648],[0.628281, 0.555802, 0.366065],20)
 
     light_ambient = AmbientLight([0.9,0.9,0.6])
     point_light = PointLight(Point(0.0,0.0,0.0), [1.0,1.0,1.0])
+    point_light.get_point_camera(view)
 
-    lights = [point_light]
+    directional_point_light = DirectionalPointLight(Point(-3.0,5.0,0.0), [1.0,1.0,1.0], Point(1.0,-1.0,0.0))
+    directional_point_light.get_point_camera(view)
 
-    sphere = Sphere(Point(0, 0, 0), 4, bronze)
+    lights = [point_light,directional_point_light]
+
+    sphere = Sphere(Point(-0.5, -0.5, -0.5), 4, bronze)
     sphere.get_center_camera(view)
-    sphere1 = Sphere(Point(0, 3, 0.1), 4, gold)
+    print(sphere.center_camera.matrix)
+    sphere1 = Sphere(Point(4.0, 4.0, -1), 4, gold)
     sphere1.get_center_camera(view)
     scene = [sphere,sphere1]
-    teste_ray = Raycasting(lights,scene, view, 20, w, h, lines, cols)
+    teste_ray = Raycasting(lights,scene, view, 35, w, h, lines, cols)
     print(view.world_to_camera)
 
     # Initialize a glut instance which will allow us to customize our window

@@ -1,10 +1,11 @@
 from utils import *
 
-class PointLight:
-    def __init__(self, point,rgb) -> None:
+class DirectionalPointLight:
+    def __init__(self, point,rgb, direction) -> None:
         self.point = point
         self.rgb = rgb
         self.point_camera = None
+        self.direction = direction
 
     def get_point_camera(self, camera):
         self.point_camera = Point.from_matrix(
@@ -12,7 +13,7 @@ class PointLight:
 
     def calculate_color(self,object_scene, collision_point, ray):
         n = self.calculate_normal_sphere(object_scene, collision_point)
-        l = self.calculate_L(object_scene, collision_point)
+        l = Point.from_matrix(self.direction.matrix * -1)
         r = self.calculate_R(l, n)
         param_difuse = dot(n,l)
         if param_difuse < 0:
@@ -45,9 +46,6 @@ class PointLight:
 
     def calculate_normal_sphere(self,sphere, collision_point):
         return Point.from_matrix((collision_point.matrix - sphere.center.matrix) / sphere.radius)
-
-    def calculate_L(self,sphere, collision_point):
-        return normalize_vector(Point.from_matrix(self.point_camera.matrix - collision_point.matrix))
 
     def calculate_R(self, l, n):
         return Point.from_matrix(2 * dot(l,n) * n.matrix - l.matrix)

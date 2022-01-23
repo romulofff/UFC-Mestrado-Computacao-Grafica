@@ -12,10 +12,8 @@ class Camera:
             cross_product(self.vector_k, self.vector_i))
 
         self.world_to_camera = np.matrix([[self.vector_i.x, self.vector_i.y, self.vector_i.z, -(dot(self.vector_i, self.point_xyz))],
-                                          [self.vector_j.x, self.vector_j.y, self.vector_j.z, -
-                                              (dot(self.vector_j, self.point_xyz))],
-                                          [self.vector_k.x, self.vector_k.y, self.vector_k.z, -
-                                              (dot(self.vector_k, self.point_xyz))],
+                                          [self.vector_j.x, self.vector_j.y, self.vector_j.z, -(dot(self.vector_j, self.point_xyz))],
+                                          [self.vector_k.x, self.vector_k.y, self.vector_k.z, -(dot(self.vector_k, self.point_xyz))],
                                           [0, 0, 0, 1],
                                           ])
 

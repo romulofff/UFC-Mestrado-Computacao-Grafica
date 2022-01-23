@@ -19,8 +19,8 @@ def dot(vector1, vector2):
 
 def normalize_vector(vector):
     if isinstance(vector, Point):
-        norm = np.sqrt(np.square(vector.matrix[:, 0:3]).sum())
-        return Point.from_matrix(vector.matrix[:, 0:3] / norm)
+        norm = math.sqrt(vector.x**2 + vector.y**2 + vector.z**2) 
+        return Point.from_matrix(vector.matrix/norm)
     else:
         norm = np.sqrt(np.square(vector).sum())
     return vector / norm
@@ -32,6 +32,15 @@ def point_matrix_mult(point: Point, matriz):
 def dist_point(pointA, pointB):
     dist = (pointB.x - pointA.x)**2 + (pointB.y - pointA.y)**2 + (pointB.z - pointA.z)**2
     return math.sqrt(dist)
+
+def translate_vector(vector, x,y,z):
+    matrix = np.matrix([[1,0,0,x],
+                        [0,1,0,y],
+                        [0,0,1,z],
+                        [0,0,0,1]])
+    return Point.from_matrix(point_matrix_mult(vector, matrix))
+    
+
 
 
 if __name__ == '__main__':

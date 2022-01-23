@@ -35,12 +35,16 @@ class Raycasting:
                 #         self.matrix[line][col] = [1.0, 1.0, 1.0]
                 #         break
                 current_dist = 7879878978979
+                color = [0,0,0]
                 for objects in self.scene:
                     dist_object,collision_point= self.collider.collide(ray, objects)
                     if (dist_object < current_dist and dist_object >= 0):
                         current_dist = dist_object
                         for light in self.lights:
-                            self.matrix[line][col] = light.calculate_color(objects,collision_point, ray)
+                            light_color = light.calculate_color(objects,collision_point, ray)
+                            color = [color[0] + light_color[0], color[1] + light_color[1], color[2] + light_color[2]]
+                            #self.matrix[line][col] = light.calculate_color(objects,collision_point, ray)
+                            self.matrix[line][col] = color
                 # If intersection att matrix
                 # self.matrix[line][col] = [
                 #     uniform(0, 1), uniform(0, 1), uniform(0, 1)]
