@@ -13,6 +13,8 @@ from point import Point
 from raycasting import Raycasting
 from sphere import Sphere
 from material import Material
+from ambient_light import AmbientLight
+from point_light import PointLight
 
 
 def rotate_vector(vector, angle, axis):
@@ -81,7 +83,7 @@ def showScreen():
 if __name__ == '__main__':
 
     w, h, lines, cols = 500, 500, 100, 100
-    point_xyz = Point(0, 0, 0)
+    point_xyz = Point(0, 0, 4.4)
     lookat = Point(0, 0, -1)
     view_up = Point(0, 1, 0)
     view = Camera(point_xyz=point_xyz,
@@ -92,12 +94,17 @@ if __name__ == '__main__':
     bronze = Material([0.2125, 0.1275, 0.054],[0.714, 0.4284, 0.18144],[0.393548, 0.271906, 0.166721])
     gold = Material([0.24725, 0.1995, 0.0745],[0.75164, 0.60648, 0.22648],[0.628281, 0.555802, 0.366065])
 
-    sphere = Sphere(Point(0, 0, -4.9), 4, bronze)
+    light_ambient = AmbientLight([0.9,0.9,0.6])
+    point_light = PointLight(Point(0.0,0.0,0.0), [0.5,0.5,0.1])
+
+    lights = [point_light]
+
+    sphere = Sphere(Point(0, 0, 0), 4, bronze)
     sphere.get_center_camera(view)
-    sphere1 = Sphere(Point(0, 3, -5), 4, gold)
+    sphere1 = Sphere(Point(0, 3, 0.1), 4, gold)
     sphere1.get_center_camera(view)
     scene = [sphere,sphere1]
-    teste_ray = Raycasting(scene, view, 20, w, h, lines, cols)
+    teste_ray = Raycasting(lights,scene, view, 20, w, h, lines, cols)
     print(view.world_to_camera)
 
     # Initialize a glut instance which will allow us to customize our window

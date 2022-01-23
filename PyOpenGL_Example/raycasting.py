@@ -5,7 +5,8 @@ from utils import *
 
 
 class Raycasting:
-    def __init__(self, scene, camera, dist_plane, height, width, nlines, ncols) -> None:
+    def __init__(self, lights, scene, camera, dist_plane, height, width, nlines, ncols) -> None:
+        self.lights = lights
         self.camera = camera
         self.scene = scene
         self.dist_plane = dist_plane
@@ -17,7 +18,7 @@ class Raycasting:
         self.width = width
         self.nlines = nlines
         self.ncols = ncols
-        self.matrix = [[[0.5, 0.5, 0.5]
+        self.matrix = [[[0.0, 0.0, 0.0]
                         for a in range(nlines)] for b in range(ncols)]
         self.collider = Collider()
 
@@ -35,10 +36,11 @@ class Raycasting:
                 #         break
                 current_dist = 7879878978979
                 for objects in self.scene:
-                    dist_object = self.collider.collide(ray, objects)
+                    dist_object,collision_point= self.collider.collide(ray, objects)
                     if (dist_object < current_dist and dist_object >= 0):
                         current_dist = dist_object
-                        self.matrix[line][col] = objects.material.ambient
+                        for light in self.lights:
+                            self.matrix[line][col] = light.calculate_color(objects,collision_point)
                 # If intersection att matrix
                 # self.matrix[line][col] = [
                 #     uniform(0, 1), uniform(0, 1), uniform(0, 1)]

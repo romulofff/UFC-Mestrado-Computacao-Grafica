@@ -4,6 +4,8 @@ from cube import Cube
 from sphere import Sphere
 from utils import *
 import math
+from material import Material
+from point import Point
 
 
 class Collider:
@@ -36,14 +38,14 @@ class Collider:
             if(dist_point(p1, ray.first_point) > dist_point(p2, ray.first_point)):
                 p1 = p2
             #return True
-            return dist_point(p1, ray.first_point)
+            return dist_point(p1, ray.first_point),p1
         elif delta ==0:
             t1 = (-b + math.sqrt(delta) ) / a
             p1 = Point.from_matrix(ray.first_point.matrix + t1 * ray.direction.matrix)
             #return True
-            dist_point(p1, ray.first_point)
+            return dist_point(p1, ray.first_point),p1
         else:
-            return -1
+            return -1, Point(0,0,0)
 
 
     def _collision_ray_cylinder(self, ray, cylinder):
