@@ -40,7 +40,7 @@ class Raycasting:
                     if (dist_object < current_dist and dist_object >= 0):
                         current_dist = dist_object
                         for light in self.lights:
-                            self.matrix[line][col] = light.calculate_color(objects,collision_point)
+                            self.matrix[line][col] = light.calculate_color(objects,collision_point, ray)
                 # If intersection att matrix
                 # self.matrix[line][col] = [
                 #     uniform(0, 1), uniform(0, 1), uniform(0, 1)]

@@ -82,7 +82,7 @@ def showScreen():
 
 if __name__ == '__main__':
 
-    w, h, lines, cols = 500, 500, 100, 100
+    w, h, lines, cols = 500, 500, 500, 500
     point_xyz = Point(0, 0, 4.4)
     lookat = Point(0, 0, -1)
     view_up = Point(0, 1, 0)
@@ -91,11 +91,11 @@ if __name__ == '__main__':
     # cylinder = Cylinder(Point(0, 0, -1), 1, 1, Point(0, 0, 1))
     # cylinder.get_center_camera(view)
 
-    bronze = Material([0.2125, 0.1275, 0.054],[0.714, 0.4284, 0.18144],[0.393548, 0.271906, 0.166721])
-    gold = Material([0.24725, 0.1995, 0.0745],[0.75164, 0.60648, 0.22648],[0.628281, 0.555802, 0.366065])
+    bronze = Material([0.2125, 0.1275, 0.054],[0.714, 0.4284, 0.18144],[0.393548, 0.271906, 0.166721],20)
+    gold = Material([0.24725, 0.1995, 0.0745],[0.75164, 0.60648, 0.22648],[0.628281, 0.555802, 0.366065],20)
 
     light_ambient = AmbientLight([0.9,0.9,0.6])
-    point_light = PointLight(Point(0.0,0.0,0.0), [0.5,0.5,0.1])
+    point_light = PointLight(Point(0.0,0.0,0.0), [1.0,1.0,1.0])
 
     lights = [point_light]
 

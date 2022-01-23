@@ -5,19 +5,37 @@ class PointLight:
         self.point = point
         self.rgb = rgb
 
-    def calculate_color(self,object_scene, collision_point):
-        intensity_ambient = [object_scene.material.ambient[0]*self.rgb[0],object_scene.material.ambient[1]*self.rgb[1],object_scene.material.ambient[2]*self.rgb[2]]
-        intensity_difuse = self.calculate_difuse(object_scene, collision_point)
-
-        return [intensity_ambient[0]+intensity_difuse[0],intensity_ambient[1]+intensity_difuse[1],intensity_ambient[2]+intensity_difuse[2]]
-
-    def calculate_difuse(self,object_scene, collision_point):
+    def calculate_color(self,object_scene, collision_point, ray):
         n = self.calculate_normal_sphere(object_scene, collision_point)
         l = self.calculate_L(object_scene, collision_point)
-        cross = dot(n,l)
-        intensity = [object_scene.material.difuse[0]*self.rgb[0]*cross,
-                     object_scene.material.difuse[1]*self.rgb[1]*cross,
-                     object_scene.material.difuse[2]*self.rgb[2]*cross]
+        r = self.calculate_R(l, n)
+        param_difuse = dot(n,l)
+        if param_difuse < 0:
+            param_difuse = 0
+        
+        param_specular = dot(r, ray.direction)
+        if param_specular < 0:
+            param_specular = 0
+        
+
+        intensity_ambient = [object_scene.material.ambient[0]*self.rgb[0],object_scene.material.ambient[1]*self.rgb[1],object_scene.material.ambient[2]*self.rgb[2]]
+        intensity_difuse = self.calculate_difuse(object_scene, collision_point,param_difuse)
+        intensity_specular = self.calculate_specular(object_scene, collision_point, param_specular, r)
+
+        return [intensity_ambient[0]+intensity_difuse[0]+intensity_specular[0],
+                intensity_ambient[1]+intensity_difuse[1]+intensity_specular[1],
+                intensity_ambient[2]+intensity_difuse[2]+intensity_specular[2]]
+
+    def calculate_difuse(self,object_scene, collision_point, param_difuse):
+        intensity = [object_scene.material.difuse[0]*self.rgb[0]*param_difuse,
+                     object_scene.material.difuse[1]*self.rgb[1]*param_difuse,
+                     object_scene.material.difuse[2]*self.rgb[2]*param_difuse]
+        return intensity
+
+    def calculate_specular(self,object_scene, collision_point, param_specular,r):
+        intensity = [object_scene.material.specular[0]*self.rgb[0]*(param_specular)**object_scene.material.range_specular,
+                     object_scene.material.specular[1]*self.rgb[1]*(param_specular)**object_scene.material.range_specular,
+                     object_scene.material.specular[2]*self.rgb[2]*(param_specular)**object_scene.material.range_specular]
         return intensity
 
     def calculate_normal_sphere(self,sphere, collision_point):
@@ -25,6 +43,9 @@ class PointLight:
 
     def calculate_L(self,sphere, collision_point):
         return normalize_vector(Point.from_matrix(self.point.matrix - collision_point.matrix))
+
+    def calculate_R(self, l, n):
+        return Point.from_matrix(2 * dot(l,n) * n.matrix - l.matrix)
     
 
 
