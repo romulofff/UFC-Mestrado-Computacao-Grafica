@@ -109,7 +109,7 @@ if __name__ == '__main__':
     spot_light = SpotLight(Point(0.0,-5.0,-5.0), [1.0,1.0,1.0], Point(0.0,1.0, 0.0), 1)
     spot_light.get_point_camera(view)
 
-    lights = [spot_light]
+    lights = [point_light, directional_point_light]
 
     sphere = Sphere(Point(0.0, 0.0, 0.0), 4, bronze)
     sphere.get_center_camera(view)
