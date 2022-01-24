@@ -5,7 +5,7 @@ class DirectionalPointLight:
         self.point = point
         self.rgb = rgb
         self.point_camera = None
-        self.direction = direction
+        self.direction = normalize_vector(direction)
 
     def get_point_camera(self, camera):
         self.point_camera = Point.from_matrix(

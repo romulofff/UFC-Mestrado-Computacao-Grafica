@@ -16,6 +16,7 @@ from material import Material
 from ambient_light import AmbientLight
 from point_light import PointLight
 from directionoal_point_light import DirectionalPointLight
+from spot_light import SpotLight
 
 from utils import *
 
@@ -94,19 +95,23 @@ if __name__ == '__main__':
     # cylinder = Cylinder(Point(0, 0, -1), 1, 1, Point(0, 0, 1))
     # cylinder.get_center_camera(view)
 
-    bronze = Material([0.2125, 0.1275, 0.054],[0.714, 0.4284, 0.18144],[0.993548, 0.971906, 0.966721],20)
-    gold = Material([0.24725, 0.1995, 0.0745],[0.75164, 0.60648, 0.22648],[0.628281, 0.555802, 0.366065],20)
+    bronze = Material([0.2125, 0.1275, 0.054],[0.714, 0.4284, 0.18144],[0.293548, 0.371906, 0.266721],2)
+    gold = Material([0.24725, 0.1995, 0.0745],[0.75164, 0.60648, 0.22648],[0.628281, 0.555802, 0.366065],2)
 
-    light_ambient = AmbientLight([0.9,0.9,0.6])
+    light_ambient = AmbientLight([1.0,1.0,1.0])
+
     point_light = PointLight(Point(0.0,0.0,0.0), [1.0,1.0,1.0])
     point_light.get_point_camera(view)
 
     directional_point_light = DirectionalPointLight(Point(-3.0,5.0,0.0), [1.0,1.0,1.0], Point(1.0,-1.0,0.0))
     directional_point_light.get_point_camera(view)
 
-    lights = [point_light,directional_point_light]
+    spot_light = SpotLight(Point(0.0,-5.0,-5.0), [1.0,1.0,1.0], Point(0.0,1.0, 0.0), 1)
+    spot_light.get_point_camera(view)
 
-    sphere = Sphere(Point(-0.5, -0.5, -0.5), 4, bronze)
+    lights = [spot_light]
+
+    sphere = Sphere(Point(0.0, 0.0, 0.0), 4, bronze)
     sphere.get_center_camera(view)
     print(sphere.center_camera.matrix)
     sphere1 = Sphere(Point(4.0, 4.0, -1), 4, gold)
