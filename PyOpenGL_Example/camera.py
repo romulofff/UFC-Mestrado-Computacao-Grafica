@@ -23,7 +23,7 @@ class Camera:
         return vector_k
 
     def origin_cordinates_i(self, point_xyz, view_up):
-        v_up = Point.from_matrix(view_up.matrix - point_xyz.matrix)
-        vector_i = cross_product(v_up, self.vector_k)
+        #v_up = Point.from_matrix(view_up.matrix - point_xyz.matrix)
+        vector_i = cross_product(view_up, self.vector_k)
         vector_i = normalize_vector(vector_i)
         return vector_i

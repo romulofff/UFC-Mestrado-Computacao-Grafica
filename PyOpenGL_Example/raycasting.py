@@ -29,6 +29,7 @@ class Raycasting:
                 x = self.point_init.x + col * self.width_frame
                 # Create ray to Perspective
                 ray = Ray(Point(0, 0, 0), Point(x, y, -self.dist_plane), 6)
+                #ray = Ray(self.camera.point_xyz, Point(x, y, -self.dist_plane), 6)
                 # Calculate intersection with scene list
                 # for objects in self.scene:
                 #     if(self.collider.collide(ray, objects)):

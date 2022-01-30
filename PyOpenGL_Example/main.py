@@ -87,7 +87,7 @@ def showScreen():
 if __name__ == '__main__':
 
     w, h, lines, cols = 500, 500, 150, 150
-    point_xyz = Point(0, 0, 5)
+    point_xyz = Point(0, 0, 3)
     lookat = Point(0, 0, -1)
     view_up = Point(0, 1, 0)
     view = Camera(point_xyz=point_xyz,
@@ -114,10 +114,10 @@ if __name__ == '__main__':
     sphere = Sphere(Point(0.0, 0.0, 0.0), 4, bronze)
     sphere.get_center_camera(view)
     print(sphere.center_camera.matrix)
-    sphere1 = Sphere(Point(4.0, 4.0, -1), 4, gold)
+    sphere1 = Sphere(Point(0.0, 0.0, -50), 9, gold)
     sphere1.get_center_camera(view)
-    scene = [sphere,sphere1]
-    teste_ray = Raycasting(lights,scene, view, 35, w, h, lines, cols)
+    scene = [sphere1]
+    teste_ray = Raycasting(lights,scene, view, 250, w, h, lines, cols)
     print(view.world_to_camera)
 
     # Initialize a glut instance which will allow us to customize our window
