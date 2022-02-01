@@ -92,7 +92,7 @@ if __name__ == '__main__':
     view_up = Point(0, 1, 0)
     view = Camera(point_xyz=point_xyz,
                   lookat=lookat, view_up=view_up)
-    cylinder = Cylinder(Point(0, 0, -50), 9, 5, Point(1, 1, -0.3))
+    cylinder = Cylinder(Point(0, 0, -50), 9, 18, Point(-0.5, -0.5, 0.0))
     cylinder.get_center_camera(view)
 
     bronze = Material([0.2125, 0.1275, 0.054],[0.714, 0.4284, 0.18144],[0.393548, 0.271906, 0.166721],2)

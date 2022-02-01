@@ -62,29 +62,43 @@ class Collider:
         delta = b**2 - a*c
 
         if delta<0:
-            return False
+            return None
 
         menor_dis = 8000000
 
         plane_inf = Plane(cylinder.center_camera, cylinder.u)
-        point_sup = Point.from_matrix(cylinder.height * cylinder.u.matrix)
+        norm = cylinder.height * cylinder.u.matrix
+        point_sup = Point.from_matrix( norm + cylinder.center_camera.matrix)
         plane_sup = Plane(point_sup, cylinder.u)
 
         p_int1 = plane_inf.collide_ray(ray)
-        p_int2 = plane_sup.collide_ray(ray)
-
         if p_int1:
-            if dist_point(p_int1, cylinder.center_camera) < cylinder.radius:
-                return True
-        if p_int2:
-            if dist_point(p_int2, point_sup) >= cylinder.radius:
-                return True
+            if dist_point(p_int1, cylinder.center_camera) > cylinder.radius:
+                p_int1 = None
+            else:
+                menor_dis = dist_point(ray.first_point, p_int1)
+
+        p_int2 = plane_sup.collide_ray(ray)
+        if p_int2 and dist_point(p_int2, point_sup) <= cylinder.radius:
+            dist2 = dist_point(p_int2, ray.first_point)
+            if(p_int1 == None or dist2 < menor_dis):
+                p_int1 = p_int2
+                menor_dis = dist2
         
-        d1 = -b + math.sqrt(delta)/a
-        d2 = -b - math.sqrt(delta)/a
+        d1 = (-b + math.sqrt(delta))/a
+        d2 = (-b - math.sqrt(delta))/a
 
         p_teste = Point.from_matrix(ray.first_point.matrix + d1 * ray.direction.matrix)
         p_teste2 = Point.from_matrix(ray.first_point.matrix + d2 * ray.direction.matrix)
+
+        # if p_int1:
+        #     if dist_point(p_int1, cylinder.center_camera) < cylinder.radius:
+        #         return True
+        # if p_int2:
+        #     if dist_point(p_int2, point_sup) >= cylinder.radius:
+        #         return True
+        
+
         
         PB1 = Point.from_matrix(p_teste.matrix - cylinder.center_camera.matrix)
         PB_u1 = dot(PB1, cylinder.u)
@@ -94,11 +108,16 @@ class Collider:
 
 
         if 0 <= PB_u1 and PB_u1 <= cylinder.height:
-            return True
+            dist1 = dist_point(p_teste, ray.first_point)
+            if dist1 < menor_dis:
+                p_int1 = p_teste
+                menor_dis = dist1
         elif 0 <= PB_u2 and PB_u2 <= cylinder.height:
-            return True
+            dist2 = dist_point(p_teste2, ray.first_point)
+            if dist2 < menor_dis:
+                p_int1 = p_teste2
 
-        return False
+        return p_int1
 
     def _collision_ray_cube(self, ray, object):
         pass
