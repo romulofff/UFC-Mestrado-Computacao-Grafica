@@ -46,8 +46,5 @@ class Raycasting:
                 #             color = [color[0] + light_color[0], color[1] + light_color[1], color[2] + light_color[2]]
                 #             #self.matrix[line][col] = light.calculate_color(objects,collision_point, ray)
                 #             self.matrix[line][col] = color
-                # If intersection att matrix
-                # self.matrix[line][col] = [
-                #     uniform(0, 1), uniform(0, 1), uniform(0, 1)]
         print("finish")
         return self.matrix
