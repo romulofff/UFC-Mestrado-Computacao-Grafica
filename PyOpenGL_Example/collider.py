@@ -38,16 +38,13 @@ class Collider:
             p2 = Point.from_matrix(ray.first_point.matrix + t2 * ray.direction.matrix)
             if(dist_point(p1, ray.first_point) > dist_point(p2, ray.first_point)):
                 p1 = p2
-            return True
             return dist_point(p1, ray.first_point),p1
         elif delta ==0:
             t1 = (-b + math.sqrt(delta) ) / a
             p1 = Point.from_matrix(ray.first_point.matrix + t1 * ray.direction.matrix)
-            return True
-            #return dist_point(p1, ray.first_point),p1
+            return dist_point(p1, ray.first_point),p1
         else:
-            #return -1, Point(0,0,0)
-            return False
+            return -1, Point(0,0,0)
 
 
     def _collision_ray_cylinder(self, ray, cylinder):
@@ -90,15 +87,6 @@ class Collider:
 
         p_teste = Point.from_matrix(ray.first_point.matrix + d1 * ray.direction.matrix)
         p_teste2 = Point.from_matrix(ray.first_point.matrix + d2 * ray.direction.matrix)
-
-        # if p_int1:
-        #     if dist_point(p_int1, cylinder.center_camera) < cylinder.radius:
-        #         return True
-        # if p_int2:
-        #     if dist_point(p_int2, point_sup) >= cylinder.radius:
-        #         return True
-        
-
         
         PB1 = Point.from_matrix(p_teste.matrix - cylinder.center_camera.matrix)
         PB_u1 = dot(PB1, cylinder.u)

@@ -5,12 +5,13 @@ from plane import Plane
 
 
 class Cylinder:
-    def __init__(self, center, radius, height, u) -> None:
+    def __init__(self, center, radius, height, u, material) -> None:
         self.center = center
         self.radius = radius
         self.height = height
         self.u = normalize_vector(u) 
         self.center_camera = None
+        self.material = material
 
     def get_center_camera(self, camera):
         self.center_camera = Point.from_matrix(
