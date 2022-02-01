@@ -9,6 +9,7 @@ from OpenGL.GLUT import *
 
 from camera import Camera
 from cylinder import Cylinder
+from cone import Cone
 from point import Point
 from raycasting import Raycasting
 from sphere import Sphere
@@ -92,10 +93,12 @@ if __name__ == '__main__':
     view_up = Point(0, 1, 0)
     view = Camera(point_xyz=point_xyz,
                   lookat=lookat, view_up=view_up)
-
+    
+    # Materials
     bronze = Material([0.2125, 0.1275, 0.054],[0.714, 0.4284, 0.18144],[0.393548, 0.271906, 0.166721],2)
     gold = Material([0.24725, 0.1995, 0.0745],[0.75164, 0.60648, 0.22648],[0.628281, 0.555802, 0.366065],2)
 
+    # Lights
     light_ambient = AmbientLight([1.0,1.0,1.0])
 
     point_light = PointLight(Point(0.0,0.0,0.0), [1.0,0.0,0.0])
@@ -109,19 +112,29 @@ if __name__ == '__main__':
 
     lights = [point_light,directional_point_light,spot_light]
 
+    # Objects 
+    cylinder = Cylinder(Point(0, 0, -50), 9, 18, Point(-0.5, -0.5, 0.0), bronze)
+    cylinder.get_center_camera(view)
+    
     sphere = Sphere(Point(-15.0, 15.0, -90.0), 12, bronze)
     sphere.get_center_camera(view)
     print(sphere.center_camera.matrix)
+    
     sphere1 = Sphere(Point(0.0, 0.0, -50), 9, gold)
     sphere1.get_center_camera(view)
-
-    cylinder = Cylinder(Point(0, 0, -50), 9, 18, Point(-0.5, -0.5, 0.0), bronze)
-    cylinder.get_center_camera(view)
-
+    
+    # cone = Cone(Point(-10,-10,-50), None, Point(-1,0,0), 30, 2, 3, Point(-15,15,-90))
+    cone = Cone(Point(0, 0, -50), 9, 18, Point(0.0, 0.7, -1.0))
+    cone.get_center_camera(view)
+    print(cone.center_camera.matrix)
     scene = [cylinder]
+    # scene = [cylinder]
+    
+    # RayCast
     teste_ray = Raycasting(lights,scene, view, 250, w, h, lines, cols)
     print(view.world_to_camera)
 
+    # OpenGL main loop
     # Initialize a glut instance which will allow us to customize our window
     glutInit()
     glutInitDisplayMode(GLUT_RGBA)  # Set the display mode to be colored
