@@ -7,7 +7,7 @@ class SpotLight:
         self.rgb = rgb
         self.point_camera = None
         self.direction = normalize_vector(direction)
-        self.angle = angle
+        self.angle = math.radians(angle)
 
     def get_point_camera(self, camera):
         self.point_camera = Point.from_matrix(
@@ -27,7 +27,6 @@ class SpotLight:
             param_specular = 0
         
         atenuation = dot(Point.from_matrix(-1 * l.matrix), self.direction)
-        print(atenuation)
 
         if math.cos(atenuation) < math.cos(self.angle):
             atenuation = 0

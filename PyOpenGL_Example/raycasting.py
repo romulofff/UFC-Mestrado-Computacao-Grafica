@@ -40,8 +40,8 @@ class Raycasting:
                     dist_object,collision_point= self.collider.collide(ray, objects)
                     if (dist_object < current_dist and dist_object >= 0):
                         current_dist = dist_object
+                        color = [0,0,0]
                         for light in self.lights:
-                            color = [0,0,0]
                             light_color = light.calculate_color(objects,collision_point, ray)
                             color = [color[0] + light_color[0], color[1] + light_color[1], color[2] + light_color[2]]
                             #self.matrix[line][col] = light.calculate_color(objects,collision_point, ray)

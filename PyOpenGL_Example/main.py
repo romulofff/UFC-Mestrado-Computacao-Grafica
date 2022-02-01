@@ -100,16 +100,16 @@ if __name__ == '__main__':
 
     light_ambient = AmbientLight([1.0,1.0,1.0])
 
-    point_light = PointLight(Point(0.0,0.0,0.0), [0.8,0.8,0.8])
+    point_light = PointLight(Point(0.0,0.0,0.0), [1.0,0.0,0.0])
     point_light.get_point_camera(view)
 
-    directional_point_light = DirectionalPointLight(Point(0,10,-43), [1.0,1.0,1.0], Point(0.0,1.0,0.0))
+    directional_point_light = DirectionalPointLight(Point(0,10,-43), [0.0,1.0,0.0], Point(0.0,1.0,0.0))
     directional_point_light.get_point_camera(view)
 
-    spot_light = SpotLight(Point(0.0,0.0,-35.0), [1.0,1.0,1.0], Point(0.0,0.0, -1.0), math.radians(120))
+    spot_light = SpotLight(Point(0.0,30.0,-45.0), [0.0,0.0,1.0], Point(0.0,-1.0, 0.0), 90)
     spot_light.get_point_camera(view)
 
-    lights = [spot_light]
+    lights = [point_light,directional_point_light,spot_light]
 
     sphere = Sphere(Point(-15.0, 15.0, -90.0), 12, bronze)
     sphere.get_center_camera(view)
