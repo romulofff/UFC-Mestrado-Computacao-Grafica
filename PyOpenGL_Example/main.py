@@ -95,28 +95,28 @@ if __name__ == '__main__':
     # cylinder = Cylinder(Point(0, 0, -1), 1, 1, Point(0, 0, 1))
     # cylinder.get_center_camera(view)
 
-    bronze = Material([0.2125, 0.1275, 0.054],[0.714, 0.4284, 0.18144],[0.293548, 0.371906, 0.266721],2)
+    bronze = Material([0.2125, 0.1275, 0.054],[0.714, 0.4284, 0.18144],[0.393548, 0.271906, 0.166721],2)
     gold = Material([0.24725, 0.1995, 0.0745],[0.75164, 0.60648, 0.22648],[0.628281, 0.555802, 0.366065],2)
 
     light_ambient = AmbientLight([1.0,1.0,1.0])
 
-    point_light = PointLight(Point(0.0,0.0,0.0), [1.0,1.0,1.0])
+    point_light = PointLight(Point(0.0,0.0,0.0), [0.8,0.8,0.8])
     point_light.get_point_camera(view)
 
-    directional_point_light = DirectionalPointLight(Point(-3.0,5.0,0.0), [1.0,1.0,1.0], Point(1.0,-1.0,0.0))
+    directional_point_light = DirectionalPointLight(Point(0,10,-43), [1.0,1.0,1.0], Point(0.0,1.0,0.0))
     directional_point_light.get_point_camera(view)
 
-    spot_light = SpotLight(Point(0.0,-5.0,-5.0), [1.0,1.0,1.0], Point(0.0,1.0, 0.0), 1)
+    spot_light = SpotLight(Point(0.0,0.0,-35.0), [1.0,1.0,1.0], Point(0.0,0.0, -1.0), math.radians(120))
     spot_light.get_point_camera(view)
 
-    lights = [point_light, directional_point_light]
+    lights = [spot_light]
 
-    sphere = Sphere(Point(0.0, 0.0, 0.0), 4, bronze)
+    sphere = Sphere(Point(-15.0, 15.0, -90.0), 12, bronze)
     sphere.get_center_camera(view)
     print(sphere.center_camera.matrix)
     sphere1 = Sphere(Point(0.0, 0.0, -50), 9, gold)
     sphere1.get_center_camera(view)
-    scene = [sphere1]
+    scene = [sphere,sphere1]
     teste_ray = Raycasting(lights,scene, view, 250, w, h, lines, cols)
     print(view.world_to_camera)
 
