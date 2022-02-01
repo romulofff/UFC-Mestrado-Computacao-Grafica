@@ -92,8 +92,8 @@ if __name__ == '__main__':
     view_up = Point(0, 1, 0)
     view = Camera(point_xyz=point_xyz,
                   lookat=lookat, view_up=view_up)
-    # cylinder = Cylinder(Point(0, 0, -1), 1, 1, Point(0, 0, 1))
-    # cylinder.get_center_camera(view)
+    cylinder = Cylinder(Point(0, 0, -50), 9, 5, Point(1, 1, -0.3))
+    cylinder.get_center_camera(view)
 
     bronze = Material([0.2125, 0.1275, 0.054],[0.714, 0.4284, 0.18144],[0.393548, 0.271906, 0.166721],2)
     gold = Material([0.24725, 0.1995, 0.0745],[0.75164, 0.60648, 0.22648],[0.628281, 0.555802, 0.366065],2)
@@ -116,7 +116,7 @@ if __name__ == '__main__':
     print(sphere.center_camera.matrix)
     sphere1 = Sphere(Point(0.0, 0.0, -50), 9, gold)
     sphere1.get_center_camera(view)
-    scene = [sphere,sphere1]
+    scene = [cylinder]
     teste_ray = Raycasting(lights,scene, view, 250, w, h, lines, cols)
     print(view.world_to_camera)
 

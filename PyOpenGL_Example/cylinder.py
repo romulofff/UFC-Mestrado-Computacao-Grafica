@@ -1,6 +1,7 @@
 from camera import Camera
 from point import Point
-from utils import point_matrix_mult
+from utils import *
+from plane import Plane
 
 
 class Cylinder:
@@ -8,7 +9,7 @@ class Cylinder:
         self.center = center
         self.radius = radius
         self.height = height
-        self.u = u
+        self.u = normalize_vector(u) 
         self.center_camera = None
 
     def get_center_camera(self, camera):
