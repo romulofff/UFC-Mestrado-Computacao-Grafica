@@ -13,8 +13,8 @@ class SpotLight:
         self.point_camera = Point.from_matrix(
             point_matrix_mult(self.point, camera.world_to_camera))
 
-    def calculate_color(self,object_scene, collision_point, ray):
-        n = self.calculate_normal_sphere(object_scene, collision_point)
+    def calculate_color(self,object_scene, collision_point, ray, normal_collide_point):
+        n = normal_collide_point
         l = normalize_vector(Point.from_matrix(self.point_camera.matrix - collision_point.matrix))
         r = self.calculate_R(l, n)
 

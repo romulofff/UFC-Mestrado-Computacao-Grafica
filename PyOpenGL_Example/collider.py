@@ -42,13 +42,15 @@ class Collider:
                 ray.first_point.matrix + t2 * ray.direction.matrix)
             if(dist_point(p1, ray.first_point) > dist_point(p2, ray.first_point)):
                 p1 = p2
-            return dist_point(p1, ray.first_point),p1
+            normal_collide_point = Point.from_matrix((p1.matrix - sphere.center.matrix) / sphere.radius)
+            return dist_point(p1, ray.first_point),p1 ,normal_collide_point
         elif delta ==0:
             t1 = (-b + math.sqrt(delta) ) / a
             p1 = Point.from_matrix(ray.first_point.matrix + t1 * ray.direction.matrix)
-            return dist_point(p1, ray.first_point),p1
+            normal_collide_point = Point.from_matrix((p1.matrix - sphere.center.matrix) / sphere.radius)
+            return dist_point(p1, ray.first_point),p1,normal_collide_point
         else:
-            return -1, Point(0,0,0)
+            return -1, Point(0,0,0), Point(0,0,0)
 
     def _collision_ray_cylinder(self, ray, cylinder):
         v_aux = Point.from_matrix(
@@ -65,7 +67,7 @@ class Collider:
         delta = b**2 - a*c
 
         if delta < 0:
-            return None
+            return -1, Point(0,0,0), Point(0,0,0)
 
         menor_dis = 8000000
 
@@ -81,6 +83,7 @@ class Collider:
                 p_int1 = None
             else:
                 menor_dis = dist_point(ray.first_point, p_int1)
+                normal_collide_point = cylinder.u
 
         # Intersect top
         p_int2 = plane_sup.collide_ray(ray)
@@ -89,6 +92,7 @@ class Collider:
             if(p_int1 == None or dist2 < menor_dis):
                 p_int1 = p_int2
                 menor_dis = dist2
+                normal_collide_point = Point.from_matrix(cylinder.u.matrix * -1)
 
         # Intersect side
         d1 = (-b + math.sqrt(delta))/a
@@ -109,20 +113,27 @@ class Collider:
             if dist1 < menor_dis:
                 p_int1 = p_teste
                 menor_dis = dist1
+                aux = Point.from_matrix(p_int1.matrix - cylinder.center_camera.matrix)
+                normal_collide_point =Point.from_matrix(aux.matrix - (dot(aux, cylinder.u) * cylinder.u.matrix))
         elif 0 <= PB_u2 and PB_u2 <= cylinder.height:
             dist2 = dist_point(p_teste2, ray.first_point)
             if dist2 < menor_dis:
                 p_int1 = p_teste2
+                aux = Point.from_matrix(p_int1.matrix - cylinder.center_camera.matrix)
+                normal_collide_point =Point.from_matrix(aux.matrix - (dot(aux, cylinder.u) * cylinder.u.matrix))
 
-        return p_int1
+        if p_int1 == None:
+            return -1, Point(0,0,0), Point(0,0,0)
+
+        return dist_point(p_int1, ray.last_point), p_int1, normal_collide_point
 
     def _collision_ray_cube(self, ray, object):
         pass
 
     def _collision_ray_cone(self, ray, cone):
         aux = Point.from_matrix(cone.n.matrix * cone.height)
-        vertex = Point(cone.center.x+aux.x, cone.center.y +
-                       aux.y, cone.center.z+aux.z)
+
+        vertex = Point.from_matrix(aux.matrix + cone.center_camera.matrix)
 
         cos_theta = cone.height / math.sqrt(cone.height**2 + cone.radius**2)
         # p_int1 = cone.base.collide_ray(ray)

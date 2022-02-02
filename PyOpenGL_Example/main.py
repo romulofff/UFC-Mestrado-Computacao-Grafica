@@ -87,7 +87,7 @@ def showScreen():
 
 if __name__ == '__main__':
 
-    w, h, lines, cols = 500, 500, 150, 150
+    w, h, lines, cols = 500, 500, 500, 500
     point_xyz = Point(0, 0, 3)
     lookat = Point(0, 0, -1)
     view_up = Point(0, 1, 0)
@@ -95,32 +95,32 @@ if __name__ == '__main__':
                   lookat=lookat, view_up=view_up)
     
     # Materials
-    bronze = Material([0.2125, 0.1275, 0.054],[0.714, 0.4284, 0.18144],[0.393548, 0.271906, 0.166721],2)
+    bronze = Material([0.2125, 0.1275, 0.054],[0.714, 0.4284, 0.18144],[0.393548, 0.271906, 0.166721],0)
     gold = Material([0.24725, 0.1995, 0.0745],[0.75164, 0.60648, 0.22648],[0.628281, 0.555802, 0.366065],2)
 
     # Lights
     light_ambient = AmbientLight([1.0,1.0,1.0])
 
-    point_light = PointLight(Point(0.0,0.0,0.0), [1.0,0.0,0.0])
+    point_light = PointLight(Point(0.0,0.0,0.0), [0.5,0.5,0.5])
     point_light.get_point_camera(view)
 
-    directional_point_light = DirectionalPointLight(Point(0,10,-43), [0.0,1.0,0.0], Point(0.0,1.0,0.0))
+    directional_point_light = DirectionalPointLight(Point(0,10,-90), [0.1,0.1,0.1], Point(0.0,1.0,1.0))
     directional_point_light.get_point_camera(view)
 
-    spot_light = SpotLight(Point(0.0,30.0,-45.0), [0.0,0.0,1.0], Point(0.0,-1.0, 0.0), 90)
+    spot_light = SpotLight(Point(-40.0,20.0,-50.0), [0.5,0.5,0.5], Point(1.0,-1.0, 0.0), 180)
     spot_light.get_point_camera(view)
 
-    lights = [point_light,directional_point_light,spot_light]
+    lights = [spot_light]
 
     # Objects 
-    cylinder = Cylinder(Point(0, 0, -50), 9, 18, Point(-0.5, -0.5, 0.0), bronze)
+    cylinder = Cylinder(Point(0, 0, -50), 9, 18, Point(0.0, 0.7, -1.0), bronze)
     cylinder.get_center_camera(view)
     
     sphere = Sphere(Point(-15.0, 15.0, -90.0), 12, bronze)
     sphere.get_center_camera(view)
     print(sphere.center_camera.matrix)
     
-    sphere1 = Sphere(Point(0.0, 0.0, -50), 9, gold)
+    sphere1 = Sphere(Point(0.0, 10.0, -60), 9, gold)
     sphere1.get_center_camera(view)
     
     # cone = Cone(Point(-10,-10,-50), None, Point(-1,0,0), 30, 2, 3, Point(-15,15,-90))

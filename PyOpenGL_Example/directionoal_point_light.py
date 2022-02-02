@@ -11,8 +11,8 @@ class DirectionalPointLight:
         self.point_camera = Point.from_matrix(
             point_matrix_mult(self.point, camera.world_to_camera))
 
-    def calculate_color(self,object_scene, collision_point, ray):
-        n = self.calculate_normal_sphere(object_scene, collision_point)
+    def calculate_color(self,object_scene, collision_point, ray,normal_collide_point):
+        n = normal_collide_point
         l = Point.from_matrix(self.direction.matrix * -1)
         r = self.calculate_R(l, n)
         param_difuse = dot(n,l)
