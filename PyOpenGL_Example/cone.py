@@ -5,12 +5,13 @@ from utils import *
 
 
 class Cone:
-    def __init__(self, center, radius, height, n, vertex=None) -> None:
+    def __init__(self, center, radius, height, n, material, vertex=None) -> None:
         self.vertex = vertex
         self.n = normalize_vector(n)
         self.height = height
         self.radius = radius
         self.center = center
+        self.material = material
         self.base = Plane(self.center, self.n)
 
     def get_center_camera(self, camera):
