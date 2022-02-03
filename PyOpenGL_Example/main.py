@@ -10,6 +10,7 @@ from OpenGL.GLUT import *
 from camera import Camera
 from cylinder import Cylinder
 from cone import Cone
+from plane import Plane
 from point import Point
 from raycasting import Raycasting
 from sphere import Sphere
@@ -87,7 +88,7 @@ def showScreen():
 
 if __name__ == '__main__':
 
-    w, h, lines, cols = 500, 500, 500, 500
+    w, h, lines, cols = 500, 500, 150, 150
     point_xyz = Point(0, 0, 3)
     lookat = Point(0, 0, -1)
     view_up = Point(0, 1, 0)
@@ -97,6 +98,8 @@ if __name__ == '__main__':
     # Materials
     bronze = Material([0.2125, 0.1275, 0.054],[0.714, 0.4284, 0.18144],[0.393548, 0.271906, 0.166721],0)
     gold = Material([0.24725, 0.1995, 0.0745],[0.75164, 0.60648, 0.22648],[0.628281, 0.555802, 0.366065],2)
+    obsidian = Material([0.05375, 0.05, 0.06625],[0.18275, 0.17, 0.22525],[0.332741, 0.328634, 0.346435], 0)
+    chrome = Material([0.25, 0.25, 0.25],[0.4, 0.4, 0.4],[0.774597, 0.774597, 0.774597],0)
 
     # Lights
     light_ambient = AmbientLight([1.0,1.0,1.0])
@@ -107,10 +110,10 @@ if __name__ == '__main__':
     directional_point_light = DirectionalPointLight(Point(0,10,-90), [0.1,0.1,0.1], Point(0.0,1.0,1.0))
     directional_point_light.get_point_camera(view)
 
-    spot_light = SpotLight(Point(-40.0,20.0,-50.0), [0.5,0.5,0.5], Point(1.0,-1.0, 0.0), 180)
+    spot_light = SpotLight(Point(-40.0,20.0,-50.0), [0.8,0.5,0.5], Point(1.0,-1.0, 0.0), 180)
     spot_light.get_point_camera(view)
 
-    lights = [spot_light]
+    lights = [point_light, directional_point_light, spot_light]
 
     # Objects 
     cylinder = Cylinder(Point(0, 0, -50), 9, 18, Point(0.0, 0.7, -1.0), bronze)
@@ -126,8 +129,11 @@ if __name__ == '__main__':
     # cone = Cone(Point(-10,-10,-50), None, Point(-1,0,0), 30, 2, 3, Point(-15,15,-90))
     cone = Cone(Point(0, 0, -50), 9, 18, Point(0.0, 0.7, -1.0))
     cone.get_center_camera(view)
-    print(cone.center_camera.matrix)
-    scene = [cylinder]
+
+    plane = Plane(Point(0,0,-100), Point(0,0.7,1), obsidian)
+    plane1 = Plane(Point(120,0,0), Point(-1,0,0), chrome)
+
+    scene = [cylinder,plane1,plane]
     # scene = [cylinder]
     
     # RayCast

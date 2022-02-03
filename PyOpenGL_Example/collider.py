@@ -23,6 +23,8 @@ class Collider:
             return self._collision_ray_cube(ray, objects)
         elif isinstance(objects, Cone):
             return self._collision_ray_cone(ray, objects)
+        elif isinstance(objects, Plane):
+            return self._collision_ray_plane(ray, objects)
         else:
             return self._collision_ray_object(ray, objects)
 
@@ -125,7 +127,7 @@ class Collider:
         if p_int1 == None:
             return -1, Point(0,0,0), Point(0,0,0)
 
-        return dist_point(p_int1, ray.last_point), p_int1, normal_collide_point
+        return dist_point(p_int1, ray.first_point), p_int1, normal_collide_point
 
     def _collision_ray_cube(self, ray, object):
         pass
@@ -196,3 +198,16 @@ class Collider:
     def _collision_ray_object(self, ray, object):
         # Collide Ray with generic object.
         pass
+
+    def _collision_ray_plane(self, ray, plane):
+        vec = Point.from_matrix(plane.point.matrix - ray.first_point.matrix)
+        product0 = dot(vec,plane.normal)
+        product1 = dot(ray.direction, plane.normal)
+
+        if(product1 == 0):
+            return -1, Point(0,0,0), Point(0,0,0)
+        
+        t_int = product0/product1
+        p1 = Point.from_matrix(ray.first_point.matrix + t_int * ray.direction.matrix)
+
+        return dist_point(p1, ray.first_point), p1, plane.normal

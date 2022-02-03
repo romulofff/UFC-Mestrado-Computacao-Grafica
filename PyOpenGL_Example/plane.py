@@ -3,9 +3,10 @@ from utils import *
 
 
 class Plane:
-    def __init__(self, point, normal) -> None:
+    def __init__(self, point, normal, material=None) -> None:
         self.point = point
         self.normal = normalize_vector(normal)
+        self.material = material
     
     def collide_ray(self, ray):
         vec = Point.from_matrix(self.point.matrix - ray.first_point.matrix)
