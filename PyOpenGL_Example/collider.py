@@ -200,7 +200,7 @@ class Collider:
         pass
 
     def _collision_ray_plane(self, ray, plane):
-        vec = Point.from_matrix(plane.point.matrix - ray.first_point.matrix)
+        vec = Point.from_matrix(plane.center.matrix - ray.first_point.matrix)
         product0 = dot(vec,plane.normal)
         product1 = dot(ray.direction, plane.normal)
 
