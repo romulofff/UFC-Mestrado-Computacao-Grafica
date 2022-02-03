@@ -39,8 +39,26 @@ def translate_vector(vector, x,y,z):
                         [0,0,1,z],
                         [0,0,0,1]])
     return Point.from_matrix(point_matrix_mult(vector, matrix))
-    
 
+
+def read_vertices_from_obj(objPath):
+    points = []
+    with open(objPath, 'r') as f:
+        for line in f:
+            try:
+                line = line.replace('v', '')
+            except:
+                #                 print("Problema na linha")
+                continue
+            line_ = line.split()
+            try:
+                points.append(
+                    Point(float(line_[0]), float(line_[1]), float(line_[2])))
+            except:
+                #                 print("Problema no ponto")
+                continue
+    return points
+  
 
 
 if __name__ == '__main__':
@@ -52,3 +70,7 @@ if __name__ == '__main__':
     newp = Point(3, 3, 3)
     newp1 = Point(0, 1, 0)
     print(normalize_vector(newp).matrix)
+
+    points = read_vertices_from_obj('obj/test.obj')
+    for p in points:
+        print(p.matrix)
