@@ -87,7 +87,7 @@ def showScreen():
 
 if __name__ == '__main__':
 
-    w, h, lines, cols = 500, 500, 500, 500
+    w, h, lines, cols = 500, 500, 250, 250,
     point_xyz = Point(0, 0, 3)
     lookat = Point(0, 0, -1)
     view_up = Point(0, 1, 0)
@@ -117,25 +117,28 @@ if __name__ == '__main__':
     cylinder = Cylinder(Point(0, 0, -50), 9, 18, Point(0.0, 0.7, -1.0), gold)
     cylinder.get_center_camera(view)
     
-    sphere = Sphere(Point(-15.0, 15.0, -90.0), 12, bronze)
-    sphere.get_center_camera(view)
-    print(sphere.center_camera.matrix)
+    # sphere = Sphere(Point(-15.0, 15.0, -90.0), 12, bronze)
+    # sphere.get_center_camera(view)
+    # print(sphere.center_camera.matrix)
     
-    sphere1 = Sphere(Point(0.0, 10.0, -60), 9, ruby)
-    sphere1.get_center_camera(view)
+    # sphere1 = Sphere(Point(0.0, 10.0, -60), 9, ruby)
+    # sphere1.get_center_camera(view)
     
-    cone = Cone(Point(0, 0, -50), 9, 18, Point(0.0, 1.0, 0.0), silver)
-    cone.get_center_camera(view)
-    print(cone.center_camera.matrix)
-    cone1 = Cone(Point(-25, 0, -50), 9, 18, Point(0.0, 1.0, 0.7), bronze)
-    cone1.get_center_camera(view)
-    cone2 = Cone(Point(25, 0, -50), 9, 18, Point(0.0, 1.0, -0.7), bronze)
-    cone2.get_center_camera(view)
+    # cone = Cone(Point(0, 0, -50), 9, 18, Point(0.0, 1.0, 0.0), silver)
+    # cone.get_center_camera(view)
+    # print(cone.center_camera.matrix)
+    # cone1 = Cone(Point(-25, 0, -50), 9, 18, Point(0.0, 1.0, 0.7), bronze)
+    # cone1.get_center_camera(view)
+    # cone2 = Cone(Point(25, 0, -50), 9, 18, Point(0.0, 1.0, -0.7), bronze)
+    # cone2.get_center_camera(view)
 
-
-    scene = [sphere1]
+    test_object = read_faces_from_obj('obj/test.obj')
+    print(test_object)
+    # scene = [sphere1]
     # scene = [cone, cone1, cone2]
-    
+    scene = [test_object]
+    # scene = [cylinder]
+
     # RayCast
     teste_ray = Raycasting(lights,scene, view, 250, w, h, lines, cols)
     print(view.world_to_camera)

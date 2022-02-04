@@ -2,6 +2,7 @@ import numpy as np
 import math
 
 from point import Point
+from face import Face
 #from ray import Ray
 #from sphere import Sphere
 
@@ -16,6 +17,8 @@ def cross_product(point_a, point_b):
 def dot(vector1, vector2):
     return vector1.x * vector2.x + vector1.y * vector2.y + vector1.z * vector2.z
 
+def norm(vector):
+    return math.sqrt(vector.x**2 + vector.y**2 + vector.z**2) 
 
 def normalize_vector(vector):
     if isinstance(vector, Point):
@@ -59,7 +62,26 @@ def read_vertices_from_obj(objPath):
                 continue
     return points
   
+def read_faces_from_obj(objPath):
+    vertices = read_vertices_from_obj(objPath)
+    print(vertices)
+    faces = []
+    with open(objPath, 'r') as f:
+        for line in f:
+            try:
+                line = line.replace('f', '')
+            except:
+                continue
+            line_ = line.split()
+            try:
+                print(vertices[int(line_[0])-1].matrix)
+                new_face = Face(vertices[int(line_[0])-1], vertices[int(line_[1])-1], vertices[int(line_[2])-1])
+                faces.append(new_face)
+            except ValueError as e:
+                print(e)
+                continue
 
+    return faces
 
 if __name__ == '__main__':
     p = Point(1, 0, 1)

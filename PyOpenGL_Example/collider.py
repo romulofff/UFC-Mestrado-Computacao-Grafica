@@ -201,4 +201,4 @@ class Collider:
 
     def _collision_ray_object(self, ray, object):
         # Collide Ray with generic object.
-        pass
+        return object.collide_ray
