@@ -75,7 +75,7 @@ def showScreen():
 
 if __name__ == '__main__':
 
-    w, h, lines, cols = 500, 500, 500, 500
+    w, h, lines, cols = 500, 500, 150, 150
 
     point_xyz = Point(0, -2, 5)
     lookat = Point(0, 0, -0)
@@ -91,10 +91,13 @@ if __name__ == '__main__':
     
     # Materials
     bronze = Material([0.2125, 0.1275, 0.054],[0.714, 0.4284, 0.18144],[0.393548, 0.271906, 0.166721],0)
-    gold = Material([0.24725, 0.1995, 0.0745],[0.75164, 0.60648, 0.22648],[0.628281, 0.555802, 0.366065],0)
     obsidian = Material([0.05375, 0.05, 0.06625],[0.18275, 0.17, 0.22525],[0.332741, 0.328634, 0.346435], 0)
     chrome = Material([0.25, 0.25, 0.25],[0.4, 0.4, 0.4],[0.774597, 0.774597, 0.774597],0)
     teste = Material([0.1, 0.1, 0.1],[0.1, 0.1, 0.1],[0.1, 0.1, 0.1],0)
+    gold = Material([0.24725, 0.1995, 0.0745],[0.75164, 0.60648, 0.22648],[0.628281, 0.555802, 0.366065],2)
+    silver = Material([0.19225, 0.19225, 0.19225], [0.50754, 0.50754, 0.50754], [0.508273, 0.508273, 0.508273], 0)
+    ruby = Material([0.1745, 0.01175, 0.01175], [0.61424, 0.04136, 0.04136], [0.727811, 0.626959, 0.626959], 1)
+
 
     # Lights
     light_ambient = AmbientLight([1.0,1.0,1.0])
@@ -123,19 +126,24 @@ if __name__ == '__main__':
     sphere.center = translate_vector(50,80,0, sphere.center)
     sphere.get_center_camera(view)
     
-    sphere1 = Sphere(Point(0.0, 10.0, -60), 9, gold)
+    sphere1 = Sphere(Point(0.0, 10.0, -60), 9, ruby)
     sphere1.center = translate_vector(-30,-20,0, sphere1.center)
     sphere1.get_center_camera(view)
     
-    # cone = Cone(Point(-10,-10,-50), None, Point(-1,0,0), 30, 2, 3, Point(-15,15,-90))
-    cone = Cone(Point(0, 0, -50), 9, 18, Point(0.0, 0.7, -1.0))
+    cone = Cone(Point(0, 0, -50), 9, 18, Point(0.0, 1.0, 0.0), silver)
     cone.get_center_camera(view)
 
-    plane = Plane(Point(0,0,-200), Point(0,0.0,1), teste)
+    plane = Plane(Point(0,0,-300), Point(0,0.0,1), teste)
     plane1 = Plane(Point(120,0,-200), Point(-1,0,0), chrome)
+    print(cone.center_camera.matrix)
+    cone1 = Cone(Point(-25, 0, -50), 9, 18, Point(0.0, 1.0, 0.7), bronze)
+    cone1.get_center_camera(view)
+    cone2 = Cone(Point(25, 0, -50), 9, 18, Point(0.0, 1.0, -0.7), bronze)
+    cone2.get_center_camera(view)
 
-    scene = [cylinder, sphere, sphere1,plane]
-    # scene = [cylinder]
+
+    #scene = [sphere1]
+    scene = [cone, cone1, cone2,sphere,plane]
     
     # RayCast
     teste_ray = Raycasting(lights,scene, view, 250, w, h, lines, cols)

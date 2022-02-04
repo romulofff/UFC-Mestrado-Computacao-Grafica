@@ -193,7 +193,13 @@ class Collider:
             if t1:
                 p_int1 = p_teste
             # if VERIFICAR INTERSECAO BASE
-        return p_int1
+        if p_int1 == None:
+            return -1, Point(0,0,0), Point(0,0,0)
+
+        aux = Point.from_matrix(p_int1.matrix - cone.center_camera.matrix)
+        normal_collide_point =Point.from_matrix(aux.matrix - (dot(aux, cone.n) * cone.n.matrix))
+
+        return dist_point(p_int1, ray.last_point), p_int1, normal_collide_point
 
     def _collision_ray_object(self, ray, object):
         # Collide Ray with generic object.
