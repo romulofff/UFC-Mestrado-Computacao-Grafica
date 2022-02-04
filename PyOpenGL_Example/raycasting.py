@@ -5,7 +5,7 @@ from utils import *
 
 
 class Raycasting:
-    def __init__(self, lights, scene, camera, dist_plane, height, width, nlines, ncols) -> None:
+    def __init__(self, lights, scene, camera, dist_plane, height, width, nlines, ncols, projection) -> None:
         self.lights = lights
         self.camera = camera
         self.scene = scene
@@ -21,6 +21,7 @@ class Raycasting:
         self.matrix = [[[0.0, 0.0, 0.0]
                         for a in range(nlines)] for b in range(ncols)]
         self.collider = Collider()
+        self.projection = projection
 
     def create_matrix(self):
         for line in range(0, self.nlines):
@@ -28,7 +29,7 @@ class Raycasting:
             for col in range(0, self.ncols):
                 x = self.point_init.x + col * self.width_frame
                 # Create ray to Perspective
-                ray = Ray(Point(0, 0, 0), Point(x, y, -self.dist_plane), 6)
+                ray = Ray(Point(0, 0, 0), Point(x, y, -self.dist_plane), self.projection, self.camera)
                 #ray = Ray(self.camera.point_xyz, Point(x, y, -self.dist_plane), 6)
                 # Calculate intersection with scene list
                 for objects in self.scene:

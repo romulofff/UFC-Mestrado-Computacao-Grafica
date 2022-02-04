@@ -22,7 +22,7 @@ class SpotLight:
         if param_difuse < 0:
             param_difuse = 0
         
-        param_specular = dot(r, ray.direction)
+        param_specular = dot(r, Point.from_matrix(-1*ray.direction.matrix))
         if param_specular < 0:
             param_specular = 0
         
@@ -30,10 +30,11 @@ class SpotLight:
 
         if math.cos(atenuation) < math.cos(self.angle):
             atenuation = 0
+        print(atenuation)
 
-        intensity_ambient = [object_scene.material.ambient[0]*self.rgb[0],
-                             object_scene.material.ambient[1]*self.rgb[1],
-                             object_scene.material.ambient[2]*self.rgb[2]]
+        intensity_ambient = [object_scene.material.ambient[0]*self.rgb[0]*atenuation,
+                             object_scene.material.ambient[1]*self.rgb[1]*atenuation,
+                             object_scene.material.ambient[2]*self.rgb[2]*atenuation]
         intensity_difuse = self.calculate_difuse(object_scene, collision_point,param_difuse,atenuation)
         intensity_specular = self.calculate_specular(object_scene, collision_point, param_specular, r,atenuation)
 
@@ -57,7 +58,7 @@ class SpotLight:
         return Point.from_matrix((collision_point.matrix - sphere.center.matrix) / sphere.radius)
 
     def calculate_R(self, l, n):
-        return Point.from_matrix(2 * dot(l,n) * n.matrix - l.matrix)
+        return normalize_vector(Point.from_matrix(2 * dot(l,n) * n.matrix - l.matrix))
     
 
 

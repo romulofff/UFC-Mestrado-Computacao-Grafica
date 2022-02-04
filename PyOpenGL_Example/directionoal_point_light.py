@@ -13,13 +13,13 @@ class DirectionalPointLight:
 
     def calculate_color(self,object_scene, collision_point, ray,normal_collide_point):
         n = normal_collide_point
-        l = Point.from_matrix(self.direction.matrix * -1)
+        l = normalize_vector(Point.from_matrix(self.direction.matrix * -1))
         r = self.calculate_R(l, n)
         param_difuse = dot(n,l)
         if param_difuse < 0:
             param_difuse = 0
         
-        param_specular = dot(r, ray.direction)
+        param_specular = dot(r, Point.from_matrix(-1*ray.direction.matrix))
         if param_specular < 0:
             param_specular = 0
         
@@ -48,7 +48,7 @@ class DirectionalPointLight:
         return Point.from_matrix((collision_point.matrix - sphere.center.matrix) / sphere.radius)
 
     def calculate_R(self, l, n):
-        return Point.from_matrix(2 * dot(l,n) * n.matrix - l.matrix)
+        return normalize_vector(Point.from_matrix((2 * dot(l,n) * n.matrix) - l.matrix))
     
 
 

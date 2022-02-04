@@ -18,7 +18,7 @@ class PointLight:
         if param_difuse < 0:
             param_difuse = 0
         
-        param_specular = dot(r, ray.direction)
+        param_specular = dot(r, Point.from_matrix(-1*ray.direction.matrix))
         if param_specular < 0:
             param_specular = 0
         
@@ -50,7 +50,7 @@ class PointLight:
         return normalize_vector(Point.from_matrix(self.point_camera.matrix - collision_point.matrix))
 
     def calculate_R(self, l, n):
-        return Point.from_matrix(2 * dot(l,n) * n.matrix - l.matrix)
+        return normalize_vector(Point.from_matrix((2 * dot(l,n) * n.matrix) - l.matrix))
     
 
 
