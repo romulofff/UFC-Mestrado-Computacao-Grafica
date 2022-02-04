@@ -111,10 +111,10 @@ if __name__ == '__main__':
     directional_point_light = DirectionalPointLight(Point(120,0,0), [0.3,0.3,0.3], Point(-1.0,0.0,0.0))
     directional_point_light.get_point_camera(view)
 
-    spot_light = SpotLight(Point(27.0,0.0,-50.0), [1.0,0.0,1.0], Point(1.0,0.0, 0.0), 15)
+    spot_light = SpotLight(Point(0.0,0.0,-30.0), [1.0,0.0,1.0], Point(1.0,0.0, 0.0), 100)
     spot_light.get_point_camera(view)
 
-    lights = [point_light,directional_point_light,point_light1]
+    lights = [point_light,point_light1,directional_point_light,spot_light]
 
     # Objects 
     cylinder = Cylinder(Point(0, 0, -50), 9, 18, Point(0.0, 0.0, 1.0), bronze)
