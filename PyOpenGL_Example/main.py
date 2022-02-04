@@ -114,15 +114,15 @@ if __name__ == '__main__':
     spot_light = SpotLight(Point(0.0,0.0,-30.0), [1.0,0.0,1.0], Point(1.0,0.0, 0.0), 100)
     spot_light.get_point_camera(view)
 
-    lights = [point_light,point_light1,directional_point_light,spot_light]
+    lights = [point_light,point_light1,directional_point_light]
 
     # Objects 
-    cylinder = Cylinder(Point(0, 0, -50), 9, 18, Point(0.0, 0.0, 1.0), bronze)
+    cylinder = Cylinder(Point(0, -40, -50), 30, 50, Point(0.0, 1.0, 1.0), bronze)
     #cylinder.center = translate_vector(10,20,-20,cylinder.center)
     cylinder.u = normalize_vector(rotate_vector(cylinder.u, 45, 'y'))
     cylinder.get_center_camera(view)
     
-    sphere = Sphere(Point(0.0, 0.0, -50.0), 12, gold)
+    sphere = Sphere(Point(0.0, 0.0, -90.0), 10, gold)
     sphere.center = translate_vector(50,80,0, sphere.center)
     sphere.get_center_camera(view)
     
@@ -130,23 +130,23 @@ if __name__ == '__main__':
     sphere1.center = translate_vector(-30,-20,0, sphere1.center)
     sphere1.get_center_camera(view)
     
-    cone = Cone(Point(0, 0, -50), 9, 18, Point(0.0, 1.0, 0.0), silver)
+    cone = Cone(Point(0, 0, -90), 15, 32, Point(0.0, 1.0, 0.0), silver)
     cone.get_center_camera(view)
 
     plane = Plane(Point(0,0,-300), Point(0,0.0,1), teste)
     plane1 = Plane(Point(120,0,-200), Point(-1,0,0), chrome)
     print(cone.center_camera.matrix)
-    cone1 = Cone(Point(-25, 0, -50), 9, 18, Point(0.0, 1.0, 0.7), bronze)
+    cone1 = Cone(Point(-25, 0, -90), 9, 18, Point(0.0, 1.0, 0.7), bronze)
     cone1.get_center_camera(view)
-    cone2 = Cone(Point(25, 0, -50), 9, 18, Point(0.0, 1.0, -0.7), bronze)
+    cone2 = Cone(Point(25, 0, -90), 9, 18, Point(0.0, 1.0, -0.7), bronze)
     cone2.get_center_camera(view)
 
 
     #scene = [sphere1]
-    scene = [cone, cone1, cone2,sphere,plane]
+    scene = [cone, cone1, cone2,sphere]
     
     # RayCast
-    teste_ray = Raycasting(lights,scene, view, 250, w, h, lines, cols)
+    teste_ray = Raycasting(lights,scene, view, 250, w, h, lines, cols,'perspective')
     print(view.world_to_camera)
 
     # OpenGL main loop
