@@ -29,29 +29,37 @@ class Raycasting:
             for col in range(0, self.ncols):
                 x = self.point_init.x + col * self.width_frame
                 # Create ray to Perspective
-                ray = Ray(Point(0, 0, 0), Point(x, y, -self.dist_plane), self.projection, self.camera)
+                ray = Ray(Point(0, 0, 0), Point(
+                    x, y, -self.dist_plane), self.projection, self.camera)
                 #ray = Ray(self.camera.point_xyz, Point(x, y, -self.dist_plane), 6)
                 # Calculate intersection with scene list
+                # for objects in self.scene:
+                #     if isinstance(objects, list):
+                #         for obj in objects:
+                #             # print(obj)
+                #             if(self.collider.collide(ray, obj)):
+                #                 self.matrix[line][col] = [1.0, 1.0, 1.0]
+                #                 break
+
+                #     elif(self.collider.collide(ray, objects)):
+                #         self.matrix[line][col] = [1.0, 1.0, 1.0]
+                #         break
+                current_dist = 7879878978979
                 for objects in self.scene:
                     if isinstance(objects, list):
                         for obj in objects:
-                            print(obj)
-                            if(self.collider.collide(ray, obj)):
-                                self.matrix[line][col] = [1.0, 1.0, 1.0]
 
-                    # if(self.collider.collide(ray, objects)):
-                        # self.matrix[line][col] = [1.0, 1.0, 1.0]
-                        # break
-                # current_dist = 7879878978979
-                # for objects in self.scene:
-                #     dist_object,collision_point, normal_collide_point= self.collider.collide(ray, objects)
-                #     if (dist_object < current_dist and dist_object >= 0):
-                #         current_dist = dist_object
-                #         color = [0,0,0]
-                #         for light in self.lights:
-                #             light_color = light.calculate_color(objects,collision_point, ray,normal_collide_point)
-                #             color = [color[0] + light_color[0], color[1] + light_color[1], color[2] + light_color[2]]
-                #             #self.matrix[line][col] = light.calculate_color(objects,collision_point, ray)
-                #             self.matrix[line][col] = color
+                            dist_object, collision_point, normal_collide_point = self.collider.collide(
+                                ray, obj)
+                            if (dist_object < current_dist and dist_object >= 0):
+                                current_dist = dist_object
+                                color = [0, 0, 0]
+                                for light in self.lights:
+                                    light_color = light.calculate_color(
+                                        obj, collision_point, ray, normal_collide_point)
+                                    color = [
+                                        color[0] + light_color[0], color[1] + light_color[1], color[2] + light_color[2]]
+                                    #self.matrix[line][col] = light.calculate_color(objects,collision_point, ray)
+                                    self.matrix[line][col] = color
         print("finish")
         return self.matrix

@@ -203,7 +203,8 @@ class Collider:
 
     def _collision_ray_object(self, ray, object):
         # Collide Ray with generic object.
-        pass
+        return object.collide_ray(ray)
+        # pass
 
     def _collision_ray_plane(self, ray, plane):
         vec = Point.from_matrix(plane.center.matrix - ray.last_point.matrix)
