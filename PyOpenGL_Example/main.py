@@ -76,7 +76,7 @@ def showScreen():
 
 if __name__ == '__main__':
 
-    w, h, lines, cols = 500, 500, 150, 150
+    w, h, lines, cols = 500, 500, 100, 100
 
     point_xyz = Point(0, -2, 5)
     lookat = Point(0, 0, -0)
@@ -118,12 +118,13 @@ if __name__ == '__main__':
     lights = [point_light,point_light1,directional_point_light]
 
     # Objects 
-    cylinder = Cylinder(Point(30, 15, -50), 50, 50, Point(0.0, 1.0, 1.0), bronze)
+    cylinder = Cylinder(Point(30, 15, -50), 5, 5, Point(0.0, 1.0, 1.0), bronze)
     cylinder.get_center_camera(view)
+    print(cylinder.center_camera.matrix)
     
     sphere = Sphere(Point(-15.0, 15.0, -90.0), 12, bronze)
     sphere.get_center_camera(view)
-    print(sphere.center_camera.matrix)
+    # print(sphere.center_camera.matrix)
     
     # sphere1 = Sphere(Point(0.0, 10.0, -60), 9, ruby)
     # sphere1.get_center_camera(view)
@@ -136,16 +137,17 @@ if __name__ == '__main__':
     # cone2 = Cone(Point(25, 0, -50), 9, 18, Point(0.0, 1.0, -0.7), bronze)
     # cone2.get_center_camera(view)
 
-    # test_object = read_faces_from_obj('obj/1face.obj', bronze)
-    # for obj in test_object:
-    #     obj.get_center_camera(view)
+    test_object = read_faces_from_obj('obj/1face.obj', bronze)
+    for obj in test_object:
+        obj.get_center_camera(view)
+        print(obj.center_camera.matrix)
     # scene = [sphere1]
     # scene = [cone, cone1, cone2]
-    scene = [sphere, cylinder]
-    # scene = [cylinder]
+    # scene = [sphere, cylinder]
+    scene = [test_object]
 
     # RayCast
-    teste_ray = Raycasting(lights,scene, view, 250, w, h, lines, cols,'cabinet')
+    teste_ray = Raycasting(lights,scene, view, 250, w, h, lines, cols, 'perspective')
     # print(view.world_to_camera)
 
     # OpenGL main loop
