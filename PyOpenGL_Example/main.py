@@ -7,6 +7,8 @@ from OpenGL.GL import *
 from OpenGL.GLU import *
 from OpenGL.GLUT import *
 
+from cluster_aabb import Cluster_AABB
+from cluster_sphere import ClusterSphere
 from camera import Camera
 from cylinder import Cylinder
 from cone import Cone
@@ -76,9 +78,9 @@ def showScreen():
 
 if __name__ == '__main__':
 
-    w, h, lines, cols = 500, 500, 150, 150
+    w, h, lines, cols = 800, 800, 150, 150
 
-    point_xyz = Point(0, -2, 5)
+    point_xyz = Point(-2, -2, 5)
     lookat = Point(0, 0, -0)
     view_up = Point(0, 1.0, 0.0)
 
@@ -91,17 +93,17 @@ if __name__ == '__main__':
 
     
     # Materials
-    bronze = Material([0.2125, 0.1275, 0.054],[0.714, 0.4284, 0.18144],[0.393548, 0.271906, 0.166721],0)
+    bronze = Material([0.2125, 0.1275, 0.054],[0.714, 0.4284, 0.18144],[0.393548, 0.271906, 0.166721],10)
     obsidian = Material([0.05375, 0.05, 0.06625],[0.18275, 0.17, 0.22525],[0.332741, 0.328634, 0.346435], 0)
     chrome = Material([0.25, 0.25, 0.25],[0.4, 0.4, 0.4],[0.774597, 0.774597, 0.774597],0)
     teste = Material([0.1, 0.1, 0.1],[0.1, 0.1, 0.1],[0.1, 0.1, 0.1],0)
-    gold = Material([0.24725, 0.1995, 0.0745],[0.75164, 0.60648, 0.22648],[0.628281, 0.555802, 0.366065],2)
+    gold = Material([0.24725, 0.1995, 0.0745],[0.75164, 0.60648, 0.22648],[0.628281, 0.555802, 0.366065],8)
     silver = Material([0.19225, 0.19225, 0.19225], [0.50754, 0.50754, 0.50754], [0.508273, 0.508273, 0.508273], 0)
     ruby = Material([0.1745, 0.01175, 0.01175], [0.61424, 0.04136, 0.04136], [0.727811, 0.626959, 0.626959], 1)
 
 
     # Lights
-    light_ambient = AmbientLight([1.0,1.0,1.0])
+    light_ambient = AmbientLight([0.0,0.0,0.8])
 
     point_light = PointLight(Point(-120.0,120.0,0.0), [0.3,0.3,0.3])
     point_light.get_point_camera(view)
@@ -109,19 +111,22 @@ if __name__ == '__main__':
     point_light1 = PointLight(Point(120.0,120.0,-50.0), [0.3,0.3,0.3])
     point_light1.get_point_camera(view)
 
-    directional_point_light = DirectionalPointLight(Point(120,0,0), [0.3,0.3,0.3], Point(-1.0,0.0,0.0))
+    point_light2 = PointLight(Point(25.0,0.0,-30.0), [0.9,0.9,0.9])
+    point_light2.get_point_camera(view)
+
+    directional_point_light = DirectionalPointLight(Point(0,0,0), [0.3,0.3,0.3], Point(0.0,0.0,-1.0))
     directional_point_light.get_point_camera(view)
 
-    spot_light = SpotLight(Point(0.0,0.0,-30.0), [1.0,0.0,1.0], Point(1.0,0.0, 0.0), 100)
+    spot_light = SpotLight(Point(-15.0,-10.0,-90.0), [1.0,1.0,0.0], Point(0.0,1.0, 0.0), 50)
     spot_light.get_point_camera(view)
 
-    lights = [point_light,point_light1,directional_point_light]
+    lights = [light_ambient,point_light, point_light1, point_light2, directional_point_light]
 
     # Objects 
-    cylinder = Cylinder(Point(30, 15, -50), 50, 50, Point(0.0, 1.0, 1.0), bronze)
+    cylinder = Cylinder(Point(30, 15, -50), 10, 15, Point(0.0, 1.0, 1.0), bronze)
     cylinder.get_center_camera(view)
     
-    sphere = Sphere(Point(-15.0, 15.0, -90.0), 12, bronze)
+    sphere = Sphere(Point(-15.0, 15.0, -50.0), 12, bronze)
     sphere.get_center_camera(view)
     print(sphere.center_camera.matrix)
     
@@ -133,19 +138,32 @@ if __name__ == '__main__':
     # print(cone.center_camera.matrix)
     # cone1 = Cone(Point(-25, 0, -50), 9, 18, Point(0.0, 1.0, 0.7), bronze)
     # cone1.get_center_camera(view)
-    # cone2 = Cone(Point(25, 0, -50), 9, 18, Point(0.0, 1.0, -0.7), bronze)
-    # cone2.get_center_camera(view)
+    cone2 = Cone(Point(25, 0, -50), 9, 18, Point(0.0, 1.0, -0.7), bronze)
+    cone2.get_center_camera(view)
+
+    plane = Plane(Point(0,-370,-50), Point(0,1,0.0),silver)
+    plane1 = Plane(Point(-370,0,-50), Point(1,0,0.0),chrome)
+    plane2 = Plane(Point(370,0,-50), Point(-1,0,0.0),ruby)
+    plane3 = Plane(Point(0,0,-450), Point(0,0,-1.0),obsidian)
 
     # test_object = read_faces_from_obj('obj/1face.obj', bronze)
     # for obj in test_object:
     #     obj.get_center_camera(view)
     # scene = [sphere1]
     # scene = [cone, cone1, cone2]
-    scene = [sphere, cylinder]
+    objects_scene = [sphere]
+
+    cluster1 = ClusterSphere(Point(30.0, 30.0, -50.0),25, [cone2, cylinder])
+    cluster1.get_center_camera(view)
+
+    cluster = ClusterSphere(Point(-15.0, 15.0, -50.0),15, objects_scene)
+    cluster.get_center_camera(view)
+
+    scene = [cluster, cluster1]
     # scene = [cylinder]
 
     # RayCast
-    teste_ray = Raycasting(lights,scene, view, 250, w, h, lines, cols,'cabinet')
+    teste_ray = Raycasting(lights,scene, view, w/2, w, h, lines, cols,'perspective')
     # print(view.world_to_camera)
 
     # OpenGL main loop

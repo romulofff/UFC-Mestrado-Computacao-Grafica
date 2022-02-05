@@ -2,6 +2,8 @@ from collider import Collider
 from point import Point
 from ray import Ray
 from utils import *
+from cluster_aabb import Cluster_AABB
+from cluster_sphere import ClusterSphere
 
 
 class Raycasting:
@@ -59,16 +61,28 @@ class Raycasting:
                                         color[0] + light_color[0], color[1] + light_color[1], color[2] + light_color[2]]
                                     #self.matrix[line][col] = light.calculate_color(objects,collision_point, ray)
                                     self.matrix[line][col] = color
-                    else:
-                        dist_object, collision_point, normal_collide_point = self.collider.collide(ray, objects)
-                        if (dist_object < current_dist and dist_object >= 0):
-                            current_dist = dist_object
-                            color = [0, 0, 0]
-                            for light in self.lights:
-                                light_color = light.calculate_color(
-                                    objects, collision_point, ray, normal_collide_point)
-                                color = [color[0] + light_color[0], color[1] + light_color[1], color[2] + light_color[2]]
-                                self.matrix[line][col] = color
+                    elif isinstance(objects, ClusterSphere):
+                        if objects.collision_ray(ray):
+                            for teste in objects.list_objects:
+                                dist_object, collision_point, normal_collide_point = self.collider.collide(ray, teste)
+                                if (dist_object < current_dist and dist_object >= 0):
+                                    current_dist = dist_object
+                                    color = [0, 0, 0]
+                                    for light in self.lights:
+                                        light_color = light.calculate_color(
+                                            teste, collision_point, ray, normal_collide_point)
+                                        color = [color[0] + light_color[0], color[1] + light_color[1], color[2] + light_color[2]]
+                                        self.matrix[line][col] = color
+                    # else:
+                    #     dist_object, collision_point, normal_collide_point = self.collider.collide(ray, objects)
+                    #     if (dist_object < current_dist and dist_object >= 0):
+                    #         current_dist = dist_object
+                    #         color = [0, 0, 0]
+                    #         for light in self.lights:
+                    #             light_color = light.calculate_color(
+                    #                 objects, collision_point, ray, normal_collide_point)
+                    #             color = [color[0] + light_color[0], color[1] + light_color[1], color[2] + light_color[2]]
+                    #             self.matrix[line][col] = color
 
         print("finish")
         return self.matrix

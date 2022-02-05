@@ -28,9 +28,9 @@ class SpotLight:
         
         atenuation = dot(Point.from_matrix(-1 * l.matrix), self.direction)
 
-        if math.cos(atenuation) < math.cos(self.angle):
+        if atenuation < math.cos(self.angle):
             atenuation = 0
-        print(atenuation)
+        #print(atenuation)
 
         intensity_ambient = [object_scene.material.ambient[0]*self.rgb[0]*atenuation,
                              object_scene.material.ambient[1]*self.rgb[1]*atenuation,
