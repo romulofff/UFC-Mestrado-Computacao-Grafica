@@ -17,7 +17,7 @@ class ClusterSphere:
 
     def collision_ray(self, ray):
         v = Point.from_matrix(ray.last_point.matrix -
-                              self.center_camera.matrix)
+                              self.center.matrix)
         a = dot(ray.direction, ray.direction)
         b = dot(v, ray.direction)
         c = dot(v, v) - self.radius**2
@@ -32,11 +32,14 @@ class ClusterSphere:
             if(dist_point(p1, ray.last_point) > dist_point(p2, ray.last_point)):
                 p1 = p2
             normal_collide_point = Point.from_matrix((p1.matrix - self.center.matrix) / self.radius)
+            #return dist_point(p1, ray.last_point),p1 ,normal_collide_point
             return True
-        elif delta ==0:
+        elif delta == 0:
             t1 = (-b + math.sqrt(delta) ) / a
             p1 = Point.from_matrix(ray.last_point.matrix + t1 * ray.direction.matrix)
             normal_collide_point = Point.from_matrix((p1.matrix - self.center.matrix) / self.radius)
+            #return dist_point(p1, ray.last_point),p1,normal_collide_point
             return True
         else:
+            #return -1, Point(0,0,0), Point(0,0,0)
             return False

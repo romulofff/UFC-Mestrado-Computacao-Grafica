@@ -16,6 +16,12 @@ class Camera:
                                           [self.vector_k.x, self.vector_k.y, self.vector_k.z, -(dot(self.vector_k, self.point_xyz))],
                                           [0, 0, 0, 1],
                                           ])
+        
+        self.camera_to_world = np.matrix([[self.vector_i.x, self.vector_j.x, self.vector_k.x, 0],
+                                          [self.vector_i.y, self.vector_j.y, self.vector_k.y, 0],
+                                          [self.vector_i.z, self.vector_j.z, self.vector_k.z, 0],
+                                          [-dot(self.point_xyz, self.vector_i), -dot(self.point_xyz, self.vector_j), -dot(self.point_xyz, self.vector_k), 1],
+                                          ])
 
     def origin_cordinates_k(self, point_xyz, lookat):
         vector_k = Point.from_matrix(point_xyz.matrix - lookat.matrix)

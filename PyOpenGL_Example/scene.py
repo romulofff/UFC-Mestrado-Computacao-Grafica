@@ -88,7 +88,7 @@ def create_scene(cluster, num_obj=15):
 
 
 if __name__ == '__main__':
-    w, h, lines, cols = 600, 600, 150, 150
+    w, h, lines, cols = 600, 600, 600, 600
 
     point_xyz = Point(0, 0, 250)
     lookat = Point(0, 0, -0)
@@ -102,6 +102,7 @@ if __name__ == '__main__':
                   lookat=lookat, view_up=view_up)
 
     # Materials
+    pb = Material([0.5, 0.5, 0.5],[0.5, 0.5, 0.5],[0.8, 0.8, 0.8],2.0)
     bronze = Material([0.2125, 0.1275, 0.054],[0.714, 0.4284, 0.18144],[0.393548, 0.271906, 0.166721],10)
     obsidian = Material([0.05375, 0.05, 0.06625],[0.18275, 0.17, 0.22525],[0.332741, 0.328634, 0.346435], 0)
     chrome = Material([0.25, 0.25, 0.25],[0.4, 0.4, 0.4],[0.774597, 0.774597, 0.774597],0)
@@ -124,9 +125,9 @@ if __name__ == '__main__':
     
     # Lights
     light_ambient1 = AmbientLight([1.0,1.0,1.0])
-    spot_light = SpotLight(Point(-15.0,-10.0,-90.0), [0.5,0.5,0.5], Point(-1.0, 0.0, 0.0), 180)
+    spot_light = SpotLight(Point(-15.0,-10.0,-90.0), [0.5,0.5,0.5], [0.5,0.5,0.5], [0.8,0.8,0.8], Point(-1.0, 0.0, 0.0), 180)
     spot_light.get_point_camera(view)
-    point_light = PointLight(Point(0.0,0.0,-250), [0.5,0.5,0.5])
+    point_light = PointLight(Point(50.0,50.0,50), [0.5,0.0,0.0], [0.5,0.5,0.5], [0.7,0.7,0.7])
     point_light.get_point_camera(view)
                     
 
@@ -137,11 +138,14 @@ if __name__ == '__main__':
     #Objects
     chao = Plane(Point(0,-200,-800), Point(0,1.0,0.0),cyan_plastic)
     horizonte = Plane(Point(0,0,-1000), Point(0,0.0,1.0),green_plastic)
-    sphere = Sphere(Point(-50,-20,-100), 40, emerald)
+    sphere = Sphere(Point(-50,-20,-100), 40, gold)
     sphere.get_center_camera(view)
-    cone = Cone(Point(100,-40,-50), 40, 80,Point(0,1,0), gold)
+    cone = Cone(Point(100,-40,-50), 40, 80, Point(0,1,0), gold)
     cone.get_center_camera(view)
-    background_cluster = [chao, horizonte,sphere, cone]
+    cilindro = Cylinder(Point(-50,-20,-100), 40, 80, Point(0,1,1), gold)
+    cilindro.get_center_camera(view)
+    cilindro.directional_camera(view)
+    background_cluster = [chao, horizonte,cilindro]
     background = ClusterSphere(Point(0.0, 0.0, -50.0),1000, background_cluster)
     background.get_center_camera(view)
     
@@ -155,28 +159,36 @@ if __name__ == '__main__':
     scene_cluster1 = create_scene(cluster1)
     for obj in scene_cluster1:
         obj.get_center_camera(view)
+        if isinstance(obj, Cylinder):
+            obj.directional_camera
     cluster1.list_objects = scene_cluster1
     cluster1.get_center_camera(view)
 
     scene_cluster2 = create_scene(cluster2)
     for obj in scene_cluster2:
         obj.get_center_camera(view)
+        if isinstance(obj, Cylinder):
+            obj.directional_camera
     cluster2.list_objects = scene_cluster2
     cluster2.get_center_camera(view)
 
     scene_cluster3 = create_scene(cluster3)
     for obj in scene_cluster3:
         obj.get_center_camera(view)
+        if isinstance(obj, Cylinder):
+            obj.directional_camera
     cluster3.list_objects = scene_cluster3
     cluster3.get_center_camera(view)
     
     scene_cluster4 = create_scene(cluster4)
     for obj in scene_cluster4:
         obj.get_center_camera(view)
+        if isinstance(obj, Cylinder):
+            obj.directional_camera
     cluster4.list_objects = scene_cluster4
     cluster4.get_center_camera(view)
     
-    scene = [cluster1, cluster2, cluster3,cluster4,background]
+    scene = [cluster1, cluster2, cluster3, cluster4,background]
     # scene = [cluster1]
     raycasting = Raycasting(lights,scene, view, w, w, h, lines, cols,'perspective')
 
