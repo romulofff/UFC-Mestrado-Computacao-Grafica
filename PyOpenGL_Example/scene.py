@@ -135,8 +135,8 @@ if __name__ == '__main__':
     # lights = [light_ambient1, point_light, spot_light]
 
     #Objects
-    chao = Plane(Point(0,-200,-500), Point(0,1.0,0.0),gold)
-    horizonte = Plane(Point(0,0,-800), Point(0,0.0,1.0),ruby)
+    chao = Plane(Point(0,-200,-800), Point(0,1.0,0.0),gold)
+    horizonte = Plane(Point(0,0,-1000), Point(0,0.0,1.0),ruby)
     background_cluster = [chao, horizonte]
     background = ClusterSphere(Point(0.0, 0.0, -50.0),1000, background_cluster)
     background.get_center_camera(view)
@@ -172,7 +172,7 @@ if __name__ == '__main__':
     cluster4.list_objects = scene_cluster4
     cluster4.get_center_camera(view)
     
-    scene = [cluster1, cluster2, cluster3,cluster4]
+    scene = [cluster1, cluster2, cluster3,cluster4,background]
     # scene = [cluster1]
     raycasting = Raycasting(lights,scene, view, w, w, h, lines, cols,'perspective')
 
