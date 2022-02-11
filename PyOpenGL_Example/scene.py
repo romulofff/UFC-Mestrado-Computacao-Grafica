@@ -1,5 +1,5 @@
 import math
-from random import choice, randrange, uniform
+from random import choice, randint, random, randrange, uniform
 
 import numpy as np
 import OpenGL
@@ -68,8 +68,11 @@ def choose_material():
     material = choice(materials)
     return material
 
+def random_point():
+    return Point(random(), random(), random())
+
 if __name__ == '__main__':
-    w, h, lines, cols = 700, 700, 150, 150
+    w, h, lines, cols = 600, 600, 400, 400
 
     point_xyz = Point(0, 0, 250)
     lookat = Point(0, 0, -0)
@@ -105,22 +108,23 @@ if __name__ == '__main__':
     
     # Lights
     light_ambient1 = AmbientLight([1.0,1.0,1.0])
-
-    lights = [light_ambient1]
-
+    spot_light = SpotLight(Point(-15.0,-10.0,-90.0), [1.0,1.0,1.0], Point(-1.0, 0.0, 0.0), 180)
+    spot_light.get_point_camera(view)
+    lights = [light_ambient1, spot_light]
+                    
     #Objects
     #Objects_Cluster1
     sphere1 = Sphere(Point(-150.0, 150.0, -100.0), 10, choose_material())
     sphere1.get_center_camera(view)
-    sphere2 = Sphere(Point(-120.0, 150.0, -100.0), 10, choose_material())
+    sphere2 = Cylinder(Point(-120.0, 150.0, -100.0), 10, 15, random_point(), choose_material())
     sphere2.get_center_camera(view)
-    sphere3 = Sphere(Point(-90.0, 150.0, -100.0), 10, choose_material())
+    sphere3 = Cylinder(Point(-90.0, 150.0, -100.0), 10, 5, random_point(), choose_material())
     sphere3.get_center_camera(view)
-    sphere4 = Sphere(Point(-150.0, 120.0, -100.0), 10, choose_material())
+    sphere4 = Cone(Point(-150.0, 120.0, -100.0), 10, randint(5, 15), random_point(), choose_material())
     sphere4.get_center_camera(view)
     sphere5 = Sphere(Point(-120.0, 120.0, -100.0), 10, choose_material())
     sphere5.get_center_camera(view)
-    sphere6 = Sphere(Point(-90.0, 120.0, -100.0), 10, choose_material())
+    sphere6 = Cone(Point(-90.0, 120.0, -100.0), 10, randint(5, 15), random_point(), choose_material())
     sphere6.get_center_camera(view)
     objects_cluster1 = [sphere1, sphere2, sphere3,sphere4, sphere5, sphere6]
 
@@ -298,7 +302,7 @@ if __name__ == '__main__':
 
     # Scene
     scene = [cluster1, cluster2, cluster3, cluster4, cluster5, cluster6, cluster7, cluster8, cluster9, cluster10]
-
+    # print(scene)
     raycasting = Raycasting(lights,scene, view, w, w, h, lines, cols,'perspective')
 
     glutInit()
