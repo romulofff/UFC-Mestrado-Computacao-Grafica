@@ -110,8 +110,13 @@ if __name__ == '__main__':
     light_ambient1 = AmbientLight([1.0,1.0,1.0])
     spot_light = SpotLight(Point(-15.0,-10.0,-90.0), [1.0,1.0,1.0], Point(-1.0, 0.0, 0.0), 180)
     spot_light.get_point_camera(view)
-    lights = [light_ambient1, spot_light]
+    point_light = PointLight(Point(0.0,0.0,0.0), [1.0,1.0,1.0])
+    point_light.get_point_camera(view)
                     
+
+
+    lights = [light_ambient1, point_light, spot_light]
+
     #Objects
     #Objects_Cluster1
     sphere1 = Sphere(Point(-150.0, 150.0, -100.0), 10, choose_material())
@@ -189,7 +194,7 @@ if __name__ == '__main__':
     sphere6.get_center_camera(view)
     objects_cluster5 = [sphere1, sphere2, sphere3,sphere4, sphere5, sphere6]
 
-        #Objects_Cluster6
+    #Objects_Cluster6
     sphere1 = Sphere(Point(-60.0, 150.0, -100.0), 10, choose_material())
     sphere1.get_center_camera(view)
     sphere2 = Sphere(Point(-30.0, 150.0, -100.0), 10, choose_material())
@@ -265,6 +270,84 @@ if __name__ == '__main__':
     sphere6.get_center_camera(view)
     objects_cluster10 = [sphere1, sphere2, sphere3,sphere4, sphere5, sphere6]
 
+    #Objects_Cluster11
+    sphere1 = Sphere(Point(30.0, 150.0, -100.0), 10, choose_material())
+    sphere1.get_center_camera(view)
+    sphere2 = Sphere(Point(60.0, 150.0, -100.0), 10, choose_material())
+    sphere2.get_center_camera(view)
+    sphere3 = Sphere(Point(90.0, 150.0, -100.0), 10, choose_material())
+    sphere3.get_center_camera(view)
+    sphere4 = Sphere(Point(30.0, 120.0, -100.0), 10, choose_material())
+    sphere4.get_center_camera(view)
+    sphere5 = Sphere(Point(60.0, 120.0, -100.0), 10, choose_material())
+    sphere5.get_center_camera(view)
+    sphere6 = Sphere(Point(90.0, 120.0, -100.0), 10, choose_material())
+    sphere6.get_center_camera(view)
+    objects_cluster11 = [sphere1, sphere2, sphere3,sphere4, sphere5, sphere6]
+
+
+    #Objects_Cluster12
+    sphere1 = Sphere(Point(30.0, 80.0, -100.0), 10, choose_material())
+    sphere1.get_center_camera(view)
+    sphere2 = Sphere(Point(60.0, 80.0, -100.0), 10, choose_material())
+    sphere2.get_center_camera(view)
+    sphere3 = Sphere(Point(90.0, 80.0, -100.0), 10, choose_material())
+    sphere3.get_center_camera(view)
+    sphere4 = Sphere(Point(30.0, 50.0, -100.0), 10, choose_material())
+    sphere4.get_center_camera(view)
+    sphere5 = Sphere(Point(60.0, 50.0, -100.0), 10, choose_material())
+    sphere5.get_center_camera(view)
+    sphere6 = Sphere(Point(90.0, 50.0, -100.0), 10, choose_material())
+    sphere6.get_center_camera(view)
+    objects_cluster12 = [sphere1, sphere2, sphere3,sphere4, sphere5, sphere6]
+
+    #Objects_Cluster13
+    sphere1 = Sphere(Point(30.0, 10.0, -100.0), 10, choose_material())
+    sphere1.get_center_camera(view)
+    sphere2 = Sphere(Point(60.0, 10.0, -100.0), 10, choose_material())
+    sphere2.get_center_camera(view)
+    sphere3 = Sphere(Point(90.0, 10.0, -100.0), 10, choose_material())
+    sphere3.get_center_camera(view)
+    sphere4 = Sphere(Point(30.0, -20.0, -100.0), 10, choose_material())
+    sphere4.get_center_camera(view)
+    sphere5 = Sphere(Point(60.0, -20.0, -100.0), 10, choose_material())
+    sphere5.get_center_camera(view)
+    sphere6 = Sphere(Point(90.0, -20.0, -100.0), 10, choose_material())
+    sphere6.get_center_camera(view)
+    objects_cluster13 = [sphere1, sphere2, sphere3,sphere4, sphere5, sphere6]
+
+    #Objects_Cluster14
+    sphere1 = Sphere(Point(30.0, -60.0, -100.0), 10, choose_material())
+    sphere1.get_center_camera(view)
+    sphere2 = Sphere(Point(60.0, -60.0, -100.0), 10, choose_material())
+    sphere2.get_center_camera(view)
+    sphere3 = Sphere(Point(90.0, -60.0, -100.0), 10, choose_material())
+    sphere3.get_center_camera(view)
+    sphere4 = Sphere(Point(30.0, -90.0, -100.0), 10, choose_material())
+    sphere4.get_center_camera(view)
+    sphere5 = Sphere(Point(60.0, -90.0, -100.0), 10, choose_material())
+    sphere5.get_center_camera(view)
+    sphere6 = Sphere(Point(90.0, -90.0, -100.0), 10, choose_material())
+    sphere6.get_center_camera(view)
+    objects_cluster14 = [sphere1, sphere2, sphere3,sphere4, sphere5, sphere6]
+
+    #Objects_Cluster15
+    #sphere1 = Sphere(Point(30.0, -130.0, -100.0), 10, choose_material())
+    #sphere1.get_center_camera(view)
+    cilindro1 = Cylinder(Point(30.0, -100.0, -50.0), 10,10,Point(3,5,9), choose_material())
+    cilindro1.get_center_camera(view)
+    sphere2 = Sphere(Point(60.0, -130.0, -100.0), 10, choose_material())
+    sphere2.get_center_camera(view)
+    sphere3 = Sphere(Point(90.0, -130.0, -100.0), 10, choose_material())
+    sphere3.get_center_camera(view)
+    sphere4 = Sphere(Point(30.0, -160.0, -100.0), 10, choose_material())
+    sphere4.get_center_camera(view)
+    sphere5 = Sphere(Point(60.0, -160.0, -100.0), 10, choose_material())
+    sphere5.get_center_camera(view)
+    sphere6 = Sphere(Point(90.0, -160.0, -100.0), 10, choose_material())
+    sphere6.get_center_camera(view)
+    objects_cluster15 = [cilindro1, sphere2, sphere3,sphere4, sphere5, sphere6]
+
 
     # Clusters
     cluster1 = ClusterSphere(Point(-120.0, 120.0, -100.0),50, objects_cluster1)
@@ -297,12 +380,31 @@ if __name__ == '__main__':
     cluster10 = ClusterSphere(Point(-30.0, -160.0, -100.0),50, objects_cluster10)
     cluster10.get_center_camera(view)
 
+    cluster11 = ClusterSphere(Point(60.0, 120.0, -100.0),50, objects_cluster11)
+    cluster11.get_center_camera(view)
 
+    cluster12 = ClusterSphere(Point(60.0, 50.0, -100.0),50, objects_cluster12)
+    cluster12.get_center_camera(view)
 
+    cluster13 = ClusterSphere(Point(60.0, -20.0, -100.0),50, objects_cluster13)
+    cluster13.get_center_camera(view)
+
+    cluster14 = ClusterSphere(Point(60.0, -90.0, -100.0),50, objects_cluster14)
+    cluster14.get_center_camera(view)
+
+    cluster15 = ClusterSphere(Point(60.0, -160.0, -100.0),100, objects_cluster15)
+    cluster15.get_center_camera(view)
+
+    
 
     # Scene
+<<<<<<< HEAD
     scene = [cluster1, cluster2, cluster3, cluster4, cluster5, cluster6, cluster7, cluster8, cluster9, cluster10]
     # print(scene)
+=======
+    scene = [cluster1, cluster2, cluster3, cluster4, cluster5, cluster6, cluster7, cluster8, cluster9, cluster10, cluster11, cluster12, cluster13, cluster14, cluster15]
+
+>>>>>>> 5a968c7d84d490a18e72532c83096a99c9c28435
     raycasting = Raycasting(lights,scene, view, w, w, h, lines, cols,'perspective')
 
     glutInit()
