@@ -398,13 +398,8 @@ if __name__ == '__main__':
     
 
     # Scene
-<<<<<<< HEAD
-    scene = [cluster1, cluster2, cluster3, cluster4, cluster5, cluster6, cluster7, cluster8, cluster9, cluster10]
-    # print(scene)
-=======
     scene = [cluster1, cluster2, cluster3, cluster4, cluster5, cluster6, cluster7, cluster8, cluster9, cluster10, cluster11, cluster12, cluster13, cluster14, cluster15]
 
->>>>>>> 5a968c7d84d490a18e72532c83096a99c9c28435
     raycasting = Raycasting(lights,scene, view, w, w, h, lines, cols,'perspective')
 
     glutInit()
