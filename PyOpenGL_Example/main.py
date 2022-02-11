@@ -78,7 +78,7 @@ def showScreen():
 
 if __name__ == '__main__':
 
-    w, h, lines, cols = 800, 800, 150, 150
+    w, h, lines, cols = 1200, 1200, 150, 150
 
 
     point_xyz = Point(-2, -2, 5)
