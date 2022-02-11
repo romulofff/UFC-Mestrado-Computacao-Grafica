@@ -65,6 +65,7 @@ class Raycasting:
                         if objects.collision_ray(ray):
                             for teste in objects.list_objects:
                                 dist_object, collision_point, normal_collide_point = self.collider.collide(ray, teste)
+                                # if (dist_object < current_dist and dist_object >= 0 and dist_object < 350):
                                 if (dist_object < current_dist and dist_object >= 0):
                                     current_dist = dist_object
                                     color = [0, 0, 0]

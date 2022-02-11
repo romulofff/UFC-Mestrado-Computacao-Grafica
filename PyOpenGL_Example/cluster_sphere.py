@@ -5,7 +5,7 @@ from material import Material
 
 
 class ClusterSphere:
-    def __init__(self, center, radius, list_objects) -> None:
+    def __init__(self, center, radius, list_objects=None) -> None:
         self.center = center
         self.radius = radius
         self.center_camera = None
