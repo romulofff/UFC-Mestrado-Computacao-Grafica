@@ -1,5 +1,5 @@
 import math
-from random import randrange, uniform
+from random import choice, randrange, uniform
 
 import numpy as np
 import OpenGL
@@ -64,6 +64,9 @@ def showScreen():
     draw_scene(w, h, lines, cols, raycasting.create_matrix())
     glutSwapBuffers()
 
+def choose_material():
+    material = choice(materials)
+    return material
 
 if __name__ == '__main__':
     w, h, lines, cols = 700, 700, 150, 150
@@ -87,7 +90,19 @@ if __name__ == '__main__':
     gold = Material([0.24725, 0.1995, 0.0745],[0.75164, 0.60648, 0.22648],[0.628281, 0.555802, 0.366065],8)
     silver = Material([0.19225, 0.19225, 0.19225], [0.50754, 0.50754, 0.50754], [0.508273, 0.508273, 0.508273], 0)
     ruby = Material([0.1745, 0.01175, 0.01175], [0.61424, 0.04136, 0.04136], [0.727811, 0.626959, 0.626959], 1)
-
+    emerald = Material([0.0215, 0.1745, 0.0215], [0.07568, 0.61424, 0.07568], [0.633, 0.727811, 0.633], 0.6)
+    brass = Material([0.329412, 0.223529, 0.027451], [0.780392, 0.568627, 0.113725], [0.992157, 0.941176, 0.807843], 0.21794872)
+    red_rubber = Material([0.05, 0.0, 0.0], [0.5, 0.4, 0.4], [0.7, 0.04, 0.04], .078125)
+    black_rubber = Material([0.02, 0.02, 0.02], [0.01, 0.01, 0.01], [0.4, 0.4, 0.4], .078125)
+    yellow_rubber = Material([0.05, 0.05, 0.0], [0.0, 0.5, 0.4], [0.7, 0.07, 0.04], .078125)
+    white_rubber = Material([0.05, 0.05, 0.05], [0.5, 0.5, 0.5], [0.7, 0.07, 0.07], .078125)
+    green_rubber = Material([0.0,	0.05,	0.0],	[0.4,	0.5,	0.4],	[0.04,	0.7,	0.04],	0.078125)
+    turquoise = Material([0.1, 0.18725, 0.1745], [0.396, 0.74151, 0.69102],  [0.297254, 0.30829, 0.306678], 0.1)
+    cyan_plastic = Material([0.0,0.1,0.06],	[0.0,0.50980392,0.50980392],[0.50196078,0.50196078,0.50196078],	0.25)
+    green_plastic = Material([0.0, 0.0, 0.0], [0.1, 0.35, 0.1],	[0.45, 0.55, 0.45],	0.25)
+    red_plastic	= Material([0.0,0.0,0.0],	[0.5,0.0,0.0],	[0.7,0.6,0.6],	0.25)
+    materials = [bronze, obsidian, chrome, teste, gold, silver, ruby, emerald, brass, red_rubber, black_rubber, yellow_rubber, white_rubber, green_rubber, turquoise, cyan_plastic, green_plastic, red_plastic]
+    
     # Lights
     light_ambient1 = AmbientLight([1.0,1.0,1.0])
 
@@ -95,154 +110,154 @@ if __name__ == '__main__':
 
     #Objects
     #Objects_Cluster1
-    sphere1 = Sphere(Point(-150.0, 150.0, -100.0), 10, bronze)
+    sphere1 = Sphere(Point(-150.0, 150.0, -100.0), 10, choose_material())
     sphere1.get_center_camera(view)
-    sphere2 = Sphere(Point(-120.0, 150.0, -100.0), 10, bronze)
+    sphere2 = Sphere(Point(-120.0, 150.0, -100.0), 10, choose_material())
     sphere2.get_center_camera(view)
-    sphere3 = Sphere(Point(-90.0, 150.0, -100.0), 10, bronze)
+    sphere3 = Sphere(Point(-90.0, 150.0, -100.0), 10, choose_material())
     sphere3.get_center_camera(view)
-    sphere4 = Sphere(Point(-150.0, 120.0, -100.0), 10, bronze)
+    sphere4 = Sphere(Point(-150.0, 120.0, -100.0), 10, choose_material())
     sphere4.get_center_camera(view)
-    sphere5 = Sphere(Point(-120.0, 120.0, -100.0), 10, bronze)
+    sphere5 = Sphere(Point(-120.0, 120.0, -100.0), 10, choose_material())
     sphere5.get_center_camera(view)
-    sphere6 = Sphere(Point(-90.0, 120.0, -100.0), 10, bronze)
+    sphere6 = Sphere(Point(-90.0, 120.0, -100.0), 10, choose_material())
     sphere6.get_center_camera(view)
     objects_cluster1 = [sphere1, sphere2, sphere3,sphere4, sphere5, sphere6]
 
 
     #Objects_Cluster2
-    sphere1 = Sphere(Point(-150.0, 80.0, -100.0), 10, bronze)
+    sphere1 = Sphere(Point(-150.0, 80.0, -100.0), 10, choose_material())
     sphere1.get_center_camera(view)
-    sphere2 = Sphere(Point(-120.0, 80.0, -100.0), 10, bronze)
+    sphere2 = Sphere(Point(-120.0, 80.0, -100.0), 10, choose_material())
     sphere2.get_center_camera(view)
-    sphere3 = Sphere(Point(-90.0, 80.0, -100.0), 10, bronze)
+    sphere3 = Sphere(Point(-90.0, 80.0, -100.0), 10, choose_material())
     sphere3.get_center_camera(view)
-    sphere4 = Sphere(Point(-150.0, 50.0, -100.0), 10, bronze)
+    sphere4 = Sphere(Point(-150.0, 50.0, -100.0), 10, choose_material())
     sphere4.get_center_camera(view)
-    sphere5 = Sphere(Point(-120.0, 50.0, -100.0), 10, bronze)
+    sphere5 = Sphere(Point(-120.0, 50.0, -100.0), 10, choose_material())
     sphere5.get_center_camera(view)
-    sphere6 = Sphere(Point(-90.0, 50.0, -100.0), 10, bronze)
+    sphere6 = Sphere(Point(-90.0, 50.0, -100.0), 10, choose_material())
     sphere6.get_center_camera(view)
     objects_cluster2 = [sphere1, sphere2, sphere3,sphere4, sphere5, sphere6]
 
     #Objects_Cluster3
-    sphere1 = Sphere(Point(-150.0, 10.0, -100.0), 10, bronze)
+    sphere1 = Sphere(Point(-150.0, 10.0, -100.0), 10, choose_material())
     sphere1.get_center_camera(view)
-    sphere2 = Sphere(Point(-120.0, 10.0, -100.0), 10, bronze)
+    sphere2 = Sphere(Point(-120.0, 10.0, -100.0), 10, choose_material())
     sphere2.get_center_camera(view)
-    sphere3 = Sphere(Point(-90.0, 10.0, -100.0), 10, bronze)
+    sphere3 = Sphere(Point(-90.0, 10.0, -100.0), 10, choose_material())
     sphere3.get_center_camera(view)
-    sphere4 = Sphere(Point(-150.0, -20.0, -100.0), 10, bronze)
+    sphere4 = Sphere(Point(-150.0, -20.0, -100.0), 10, choose_material())
     sphere4.get_center_camera(view)
-    sphere5 = Sphere(Point(-120.0, -20.0, -100.0), 10, bronze)
+    sphere5 = Sphere(Point(-120.0, -20.0, -100.0), 10, choose_material())
     sphere5.get_center_camera(view)
-    sphere6 = Sphere(Point(-90.0, -20.0, -100.0), 10, bronze)
+    sphere6 = Sphere(Point(-90.0, -20.0, -100.0), 10, choose_material())
     sphere6.get_center_camera(view)
     objects_cluster3 = [sphere1, sphere2, sphere3,sphere4, sphere5, sphere6]
 
     #Objects_Cluster4
-    sphere1 = Sphere(Point(-150.0, -60.0, -100.0), 10, bronze)
+    sphere1 = Sphere(Point(-150.0, -60.0, -100.0), 10, choose_material())
     sphere1.get_center_camera(view)
-    sphere2 = Sphere(Point(-120.0, -60.0, -100.0), 10, bronze)
+    sphere2 = Sphere(Point(-120.0, -60.0, -100.0), 10, choose_material())
     sphere2.get_center_camera(view)
-    sphere3 = Sphere(Point(-90.0, -60.0, -100.0), 10, bronze)
+    sphere3 = Sphere(Point(-90.0, -60.0, -100.0), 10, choose_material())
     sphere3.get_center_camera(view)
-    sphere4 = Sphere(Point(-150.0, -90.0, -100.0), 10, bronze)
+    sphere4 = Sphere(Point(-150.0, -90.0, -100.0), 10, choose_material())
     sphere4.get_center_camera(view)
-    sphere5 = Sphere(Point(-120.0, -90.0, -100.0), 10, bronze)
+    sphere5 = Sphere(Point(-120.0, -90.0, -100.0), 10, choose_material())
     sphere5.get_center_camera(view)
-    sphere6 = Sphere(Point(-90.0, -90.0, -100.0), 10, bronze)
+    sphere6 = Sphere(Point(-90.0, -90.0, -100.0), 10, choose_material())
     sphere6.get_center_camera(view)
     objects_cluster4 = [sphere1, sphere2, sphere3,sphere4, sphere5, sphere6]
 
     #Objects_Cluster5
-    sphere1 = Sphere(Point(-150.0, -130.0, -100.0), 10, bronze)
+    sphere1 = Sphere(Point(-150.0, -130.0, -100.0), 10, choose_material())
     sphere1.get_center_camera(view)
-    sphere2 = Sphere(Point(-120.0, -130.0, -100.0), 10, bronze)
+    sphere2 = Sphere(Point(-120.0, -130.0, -100.0), 10, choose_material())
     sphere2.get_center_camera(view)
-    sphere3 = Sphere(Point(-90.0, -130.0, -100.0), 10, bronze)
+    sphere3 = Sphere(Point(-90.0, -130.0, -100.0), 10, choose_material())
     sphere3.get_center_camera(view)
-    sphere4 = Sphere(Point(-150.0, -160.0, -100.0), 10, bronze)
+    sphere4 = Sphere(Point(-150.0, -160.0, -100.0), 10, choose_material())
     sphere4.get_center_camera(view)
-    sphere5 = Sphere(Point(-120.0, -160.0, -100.0), 10, bronze)
+    sphere5 = Sphere(Point(-120.0, -160.0, -100.0), 10, choose_material())
     sphere5.get_center_camera(view)
-    sphere6 = Sphere(Point(-90.0, -160.0, -100.0), 10, bronze)
+    sphere6 = Sphere(Point(-90.0, -160.0, -100.0), 10, choose_material())
     sphere6.get_center_camera(view)
     objects_cluster5 = [sphere1, sphere2, sphere3,sphere4, sphere5, sphere6]
 
         #Objects_Cluster6
-    sphere1 = Sphere(Point(-60.0, 150.0, -100.0), 10, bronze)
+    sphere1 = Sphere(Point(-60.0, 150.0, -100.0), 10, choose_material())
     sphere1.get_center_camera(view)
-    sphere2 = Sphere(Point(-30.0, 150.0, -100.0), 10, bronze)
+    sphere2 = Sphere(Point(-30.0, 150.0, -100.0), 10, choose_material())
     sphere2.get_center_camera(view)
-    sphere3 = Sphere(Point(00.0, 150.0, -100.0), 10, bronze)
+    sphere3 = Sphere(Point(00.0, 150.0, -100.0), 10, choose_material())
     sphere3.get_center_camera(view)
-    sphere4 = Sphere(Point(-60.0, 120.0, -100.0), 10, bronze)
+    sphere4 = Sphere(Point(-60.0, 120.0, -100.0), 10, choose_material())
     sphere4.get_center_camera(view)
-    sphere5 = Sphere(Point(-30.0, 120.0, -100.0), 10, bronze)
+    sphere5 = Sphere(Point(-30.0, 120.0, -100.0), 10, choose_material())
     sphere5.get_center_camera(view)
-    sphere6 = Sphere(Point(0.0, 120.0, -100.0), 10, bronze)
+    sphere6 = Sphere(Point(0.0, 120.0, -100.0), 10, choose_material())
     sphere6.get_center_camera(view)
     objects_cluster6 = [sphere1, sphere2, sphere3,sphere4, sphere5, sphere6]
 
 
     #Objects_Cluster7
-    sphere1 = Sphere(Point(-60.0, 80.0, -100.0), 10, bronze)
+    sphere1 = Sphere(Point(-60.0, 80.0, -100.0), 10, choose_material())
     sphere1.get_center_camera(view)
-    sphere2 = Sphere(Point(-30.0, 80.0, -100.0), 10, bronze)
+    sphere2 = Sphere(Point(-30.0, 80.0, -100.0), 10, choose_material())
     sphere2.get_center_camera(view)
-    sphere3 = Sphere(Point(0.0, 80.0, -100.0), 10, bronze)
+    sphere3 = Sphere(Point(0.0, 80.0, -100.0), 10, choose_material())
     sphere3.get_center_camera(view)
-    sphere4 = Sphere(Point(-60.0, 50.0, -100.0), 10, bronze)
+    sphere4 = Sphere(Point(-60.0, 50.0, -100.0), 10, choose_material())
     sphere4.get_center_camera(view)
-    sphere5 = Sphere(Point(-30.0, 50.0, -100.0), 10, bronze)
+    sphere5 = Sphere(Point(-30.0, 50.0, -100.0), 10, choose_material())
     sphere5.get_center_camera(view)
-    sphere6 = Sphere(Point(0.0, 50.0, -100.0), 10, bronze)
+    sphere6 = Sphere(Point(0.0, 50.0, -100.0), 10, choose_material())
     sphere6.get_center_camera(view)
     objects_cluster7 = [sphere1, sphere2, sphere3,sphere4, sphere5, sphere6]
 
     #Objects_Cluster8
-    sphere1 = Sphere(Point(-60.0, 10.0, -100.0), 10, bronze)
+    sphere1 = Sphere(Point(-60.0, 10.0, -100.0), 10, choose_material())
     sphere1.get_center_camera(view)
-    sphere2 = Sphere(Point(-30.0, 10.0, -100.0), 10, bronze)
+    sphere2 = Sphere(Point(-30.0, 10.0, -100.0), 10, choose_material())
     sphere2.get_center_camera(view)
-    sphere3 = Sphere(Point(0.0, 10.0, -100.0), 10, bronze)
+    sphere3 = Sphere(Point(0.0, 10.0, -100.0), 10, choose_material())
     sphere3.get_center_camera(view)
-    sphere4 = Sphere(Point(-60.0, -20.0, -100.0), 10, bronze)
+    sphere4 = Sphere(Point(-60.0, -20.0, -100.0), 10, choose_material())
     sphere4.get_center_camera(view)
-    sphere5 = Sphere(Point(-30.0, -20.0, -100.0), 10, bronze)
+    sphere5 = Sphere(Point(-30.0, -20.0, -100.0), 10, choose_material())
     sphere5.get_center_camera(view)
-    sphere6 = Sphere(Point(0.0, -20.0, -100.0), 10, bronze)
+    sphere6 = Sphere(Point(0.0, -20.0, -100.0), 10, choose_material())
     sphere6.get_center_camera(view)
     objects_cluster8 = [sphere1, sphere2, sphere3,sphere4, sphere5, sphere6]
 
     #Objects_Cluster9
-    sphere1 = Sphere(Point(-60.0, -60.0, -100.0), 10, bronze)
+    sphere1 = Sphere(Point(-60.0, -60.0, -100.0), 10, choose_material())
     sphere1.get_center_camera(view)
-    sphere2 = Sphere(Point(-30.0, -60.0, -100.0), 10, bronze)
+    sphere2 = Sphere(Point(-30.0, -60.0, -100.0), 10, choose_material())
     sphere2.get_center_camera(view)
-    sphere3 = Sphere(Point(-0.0, -60.0, -100.0), 10, bronze)
+    sphere3 = Sphere(Point(-0.0, -60.0, -100.0), 10, choose_material())
     sphere3.get_center_camera(view)
-    sphere4 = Sphere(Point(-60.0, -90.0, -100.0), 10, bronze)
+    sphere4 = Sphere(Point(-60.0, -90.0, -100.0), 10, choose_material())
     sphere4.get_center_camera(view)
-    sphere5 = Sphere(Point(-30.0, -90.0, -100.0), 10, bronze)
+    sphere5 = Sphere(Point(-30.0, -90.0, -100.0), 10, choose_material())
     sphere5.get_center_camera(view)
-    sphere6 = Sphere(Point(0.0, -90.0, -100.0), 10, bronze)
+    sphere6 = Sphere(Point(0.0, -90.0, -100.0), 10, choose_material())
     sphere6.get_center_camera(view)
     objects_cluster9 = [sphere1, sphere2, sphere3,sphere4, sphere5, sphere6]
 
     #Objects_Cluster10
-    sphere1 = Sphere(Point(-60.0, -130.0, -100.0), 10, bronze)
+    sphere1 = Sphere(Point(-60.0, -130.0, -100.0), 10, choose_material())
     sphere1.get_center_camera(view)
-    sphere2 = Sphere(Point(-30.0, -130.0, -100.0), 10, bronze)
+    sphere2 = Sphere(Point(-30.0, -130.0, -100.0), 10, choose_material())
     sphere2.get_center_camera(view)
-    sphere3 = Sphere(Point(0.0, -130.0, -100.0), 10, bronze)
+    sphere3 = Sphere(Point(0.0, -130.0, -100.0), 10, choose_material())
     sphere3.get_center_camera(view)
-    sphere4 = Sphere(Point(-60.0, -160.0, -100.0), 10, bronze)
+    sphere4 = Sphere(Point(-60.0, -160.0, -100.0), 10, choose_material())
     sphere4.get_center_camera(view)
-    sphere5 = Sphere(Point(-30.0, -160.0, -100.0), 10, bronze)
+    sphere5 = Sphere(Point(-30.0, -160.0, -100.0), 10, choose_material())
     sphere5.get_center_camera(view)
-    sphere6 = Sphere(Point(0.0, -160.0, -100.0), 10, bronze)
+    sphere6 = Sphere(Point(0.0, -160.0, -100.0), 10, choose_material())
     sphere6.get_center_camera(view)
     objects_cluster10 = [sphere1, sphere2, sphere3,sphere4, sphere5, sphere6]
 

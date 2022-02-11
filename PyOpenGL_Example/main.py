@@ -111,9 +111,10 @@ if __name__ == '__main__':
     green_rubber = Material([0.0,	0.05,	0.0],	[0.4,	0.5,	0.4],	[0.04,	0.7,	0.04],	0.078125)
     turquoise = Material([0.1, 0.18725, 0.1745], [0.396, 0.74151, 0.69102],  [0.297254, 0.30829, 0.306678], 0.1)
     cyan_plastic = Material([0.0,0.1,0.06],	[0.0,0.50980392,0.50980392],[0.50196078,0.50196078,0.50196078],	0.25)
-    green_plastic =	Material([0.0, 0.0, 0.0], [0.1, 0.35, 0.1],	[0.45, 0.55, 0.45],	0.25)
+    green_plastic = Material([0.0, 0.0, 0.0], [0.1, 0.35, 0.1],	[0.45, 0.55, 0.45],	0.25)
     red_plastic	= Material([0.0,0.0,0.0],	[0.5,0.0,0.0],	[0.7,0.6,0.6],	0.25)
-
+    materials = [bronze, obsidian, chrome, teste, gold, silver, ruby, emerald, brass, red_rubber, black_rubber, yellow_rubber, white_rubber, green_rubber, turquoise, cyan_plastic, green_plastic, red_plastic]
+    
     # Lights
     light_ambient = AmbientLight([0.0,0.0,0.8])
 
