@@ -88,7 +88,7 @@ def create_scene(cluster, num_obj=10):
 
 
 if __name__ == '__main__':
-    w, h, lines, cols = 600, 600, 150, 150
+    w, h, lines, cols = 600, 600, 50, 50
 
     point_xyz = Point(0, 0, 250)
     lookat = Point(0, 0, -0)
@@ -131,7 +131,7 @@ if __name__ == '__main__':
                     
 
 
-    lights = [light_ambient1, spot_light]
+    lights = [light_ambient1, spot_light, point_light]
     # lights = [light_ambient1, point_light, spot_light]
 
     #Objects
@@ -143,10 +143,10 @@ if __name__ == '__main__':
     
     #Objects_Cluster1
     # cluster1 = ClusterSphere(Point(0.0, 0.0, -300.0), 300)
-    cluster1 =  ClusterSphere(Point(-150, 150, -200), 100)
-    cluster2 = ClusterSphere(Point(-150, 50, -200), 100)
-    cluster3 = ClusterSphere(Point(-50, 150, -200), 100)
-    cluster4 = ClusterSphere(Point(-50, 50, -200), 100)
+    cluster1 =  ClusterSphere(Point(-150, 150, -200), 150)
+    cluster2 = ClusterSphere(Point(-150, -150, -200), 150)
+    cluster3 = ClusterSphere(Point(150, 150, -200), 150)
+    cluster4 = ClusterSphere(Point(150, -150, -200), 150)
     # Scene
     scene_cluster1 = create_scene(cluster1)
     for obj in scene_cluster1:
@@ -172,7 +172,7 @@ if __name__ == '__main__':
     cluster4.list_objects = scene_cluster4
     cluster4.get_center_camera(view)
     
-    scene = [cluster1, cluster2, cluster3, cluster4]
+    scene = [cluster1, cluster2, cluster3,cluster4]
     # scene = [cluster1]
     raycasting = Raycasting(lights,scene, view, w, w, h, lines, cols,'perspective')
 
