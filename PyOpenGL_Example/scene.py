@@ -71,11 +71,11 @@ def choose_material():
 def random_point():
     return Point(random(), random(), random())    
 
-def create_scene(cluster, num_obj=10):
+def create_scene(cluster, num_obj=15):
     scene = []
     for i in range(num_obj):
         random_float = random()
-        center = Point(i+randint(cluster.center.x-cluster.radius, cluster.center.x+cluster.radius), randint(cluster.center.y-cluster.radius, cluster.center.y+cluster.radius), -i+randint(cluster.center.z-cluster.radius, -10))
+        center = Point(i+randint(cluster.center.x-cluster.radius, cluster.center.x+cluster.radius), randint(cluster.center.y-cluster.radius, cluster.center.y+cluster.radius), -i+randint(cluster.center.z-cluster.radius+50, -10))
         # print(center.matrix)
         object_choice = choice([0, 1, 2])
         if object_choice == 0:
@@ -88,7 +88,7 @@ def create_scene(cluster, num_obj=10):
 
 
 if __name__ == '__main__':
-    w, h, lines, cols = 600, 600, 50, 50
+    w, h, lines, cols = 600, 600, 150, 150
 
     point_xyz = Point(0, 0, 250)
     lookat = Point(0, 0, -0)
@@ -124,20 +124,24 @@ if __name__ == '__main__':
     
     # Lights
     light_ambient1 = AmbientLight([1.0,1.0,1.0])
-    spot_light = SpotLight(Point(-15.0,-10.0,-90.0), [1.0,1.0,1.0], Point(-1.0, 0.0, 0.0), 180)
+    spot_light = SpotLight(Point(-15.0,-10.0,-90.0), [0.5,0.5,0.5], Point(-1.0, 0.0, 0.0), 180)
     spot_light.get_point_camera(view)
-    point_light = PointLight(Point(0.0,0.0,0.0), [1.0,1.0,1.0])
+    point_light = PointLight(Point(0.0,0.0,-250), [0.5,0.5,0.5])
     point_light.get_point_camera(view)
                     
 
 
-    lights = [light_ambient1, spot_light, point_light]
+    lights = [light_ambient1, point_light, spot_light]
     # lights = [light_ambient1, point_light, spot_light]
 
     #Objects
-    chao = Plane(Point(0,-200,-800), Point(0,1.0,0.0),gold)
-    horizonte = Plane(Point(0,0,-1000), Point(0,0.0,1.0),ruby)
-    background_cluster = [chao, horizonte]
+    chao = Plane(Point(0,-200,-800), Point(0,1.0,0.0),cyan_plastic)
+    horizonte = Plane(Point(0,0,-1000), Point(0,0.0,1.0),green_plastic)
+    sphere = Sphere(Point(-50,-20,-100), 40, emerald)
+    sphere.get_center_camera(view)
+    cone = Cone(Point(100,-40,-50), 40, 80,Point(0,1,0), gold)
+    cone.get_center_camera(view)
+    background_cluster = [chao, horizonte,sphere, cone]
     background = ClusterSphere(Point(0.0, 0.0, -50.0),1000, background_cluster)
     background.get_center_camera(view)
     

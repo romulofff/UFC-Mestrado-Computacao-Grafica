@@ -28,7 +28,7 @@ class SpotLight:
         
         atenuation = dot(Point.from_matrix(-1 * l.matrix), self.direction)
 
-        if atenuation < math.cos(self.angle):
+        if atenuation > math.cos(self.angle):
             atenuation = 0
         #print(atenuation)
 
